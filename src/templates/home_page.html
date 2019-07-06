@@ -12,24 +12,23 @@
 	<h1 >{{ title }}</h1>
 	<h1>Hello, world! We are working</h1>
 </div>
-<div class='container'>
-	<div class='row'>
-	    <div class='col'>
-	    	<img src="{% static 'img/mscott.png' %}" class='img-fluid' />
-	    	<p>{{ content }}</p>
-		</div>
-	</div>
 
-	<!--Shows how to display something only if the user is logged in -->
-	{% if request.user.is_authenticated %}
-	<div class='row'>
-		<div class='col'>
-		<h1>Premium</h1>
-		{{ premium_content }}
-		</div>
+<div class='row'>
+    <div class='col'>
+    	<img src="{% static 'img/mscott.png' %}" class='img-fluid' />
+    	<p>{{ content }}</p>
 	</div>
-	{% endif %}
 </div>
+
+<!--Shows how to display something only if the user is logged in -->
+{% if request.user.is_authenticated %}
+<div class='row'>
+	<div class='col'>
+	<h1>Premium</h1>
+	{{ premium_content }}
+	</div>
+</div>
+{% endif %}
 
 {% endblock %}
 
