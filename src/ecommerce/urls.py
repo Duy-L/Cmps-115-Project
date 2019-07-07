@@ -31,7 +31,7 @@ from django.views.generic import TemplateView
 #     ProductFeaturedDetailView,
 #     )
 
-from .views import home_page, about_page, contact_page, login_page, register_page
+from .views import home_page, about_page, contact_page, login_page, register_page, logout_page
 
 urlpatterns = [
     url(r'^$', home_page, name='home'),
