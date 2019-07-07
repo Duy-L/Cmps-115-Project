@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, get_user_model, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -82,7 +82,13 @@ def register_page(request):
 
 
 
-
+def logout_page (request):
+	logout (request)
+	context = {
+		"title":"Hello World!",
+		"content":"Welcome to the homepage.",
+	}
+	return render(request, "home_page.html", context)
 
 
 
