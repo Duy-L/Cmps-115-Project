@@ -6,6 +6,9 @@ from .forms import ContactForm, LoginForm, RegisterForm
 
 
 def home_page(request):
+	#if request.user.is_authenticated() is None:
+	#	return Login
+	#print(request.session.get("first_name", "Unknown"))
 	context = {
 		"title":"Hello World!",
 		"content":"Welcome to the homepage.",
