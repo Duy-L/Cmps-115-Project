@@ -1,57 +1,67 @@
-{% url 'home' as home_url %}
-{% url 'contact' as contact_url %}
+{% load static %}
+<!-- {% url 'home' as home_url %} -->
+<!-- {% url 'contact' as contact_url %} -->
 {% url 'products:list' as products_list_url %}
 {% url 'login' as login_url %}
-{% url 'register' as register_url %}
+<!-- {% url 'register' as register_url %} -->
 {% url 'cart:home' as cart_url %}
 
-
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-dark bg-dark mb-3">
-  <div class='flex'></div>
-  {% include 'search/snippets/search-form.html' %}
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-light mb-3" style="background-color: #FFFFFF;">
+  <div class='container'>
   <a class="navbar-brand" href="{% url 'home' %}"> 
-    <!--<img src="http://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> LOGO PIC HERE-->
-    {% if brand_name %} {{ brand_name }} {% else %}CFE eCommerce {% endif %}
+    <img src="{% static 'img/wabisabi.png' %}" width="120" height="60" class="d-inline-block align-top" alt="">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-`
+
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item {% if request.path == home_url %}active{% endif %}">
-        <!-- <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a> -->
-      </li>
-      <!-- <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
+      {% include 'search/snippets/search-form.html' %}
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <!-- <li class="nav-item {% if request.path == home_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li> -->
+     <!--  <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
       </li> -->
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
+        <a class="nav-link" href="{% url 'products:list' %}">Buy</a>
+      </li>
+      <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'products:list' %}">Sell</a>
+      </li>
+      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
       </li>
       {% if request.user.is_authenticated %}
-      <li class="nav-item dropdown">
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{user.username}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">Account Profile</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <!-- <a class="dropdown-item" href="#">Sell Item</a> -->
               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </div>
-      </li>
+        </li>
       {% else %}
-      <li class="nav-item {% if request.path == register_url %}active{% endif %}">
+      <!-- <li class="nav-item {% if request.path == register_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'register' %}">Register</a>
-      </li>
-      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-      </li>
+      </li> -->
       {% endif %}
+      
       <li class="nav-item {% if request.path == cart_url %}active{% endif %}">
           <a class="nav-link" href="{{ cart_url }}"> Shopping bag ({{ request.session.cart_items }})</a>
       </li>
-
     </ul>
+
+
+   
+
+
+    
   </div>
-</div>
+  </div>
 </nav>
