@@ -5,26 +5,28 @@
 {% url 'register' as register_url %}
 {% url 'cart:home' as cart_url %}
 
-  <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark mb-3">
-  <div class='container'>
+
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-dark bg-dark mb-3">
+  <div class='flex'></div>
+  {% include 'search/snippets/search-form.html' %}
   <a class="navbar-brand" href="{% url 'home' %}"> 
-    <img src="http://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    <!--<img src="http://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> LOGO PIC HERE-->
     {% if brand_name %} {{ brand_name }} {% else %}CFE eCommerce {% endif %}
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+`
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item {% if request.path == home_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+        <!-- <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a> -->
       </li>
-      <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
+      <!-- <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-      </li>
+      </li> -->
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'products:list' %}">Products</a>
+        <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
       </li>
       {% if request.user.is_authenticated %}
       <li class="nav-item dropdown">
@@ -33,7 +35,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">Account Profile</a>
-              <a class="dropdown-item" href="#">Sell Item</a>
+              <a class="dropdown-item" href="#">Something else here</a>
               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </div>
       </li>
@@ -50,7 +52,6 @@
       </li>
 
     </ul>
-    {% include 'search/snippets/search-form.html' %}
   </div>
-  </div>
+</div>
 </nav>
