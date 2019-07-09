@@ -31,8 +31,10 @@ class ContactForm(forms.Form):
 
 	def clean_email(self):
 		email = self.cleaned_data.get("email")
-		if not "gmail.com" in email:
-			raise forms.ValidationError("Email has to be gmail.com")
+		if not "@" in email:
+			raise forms.ValidationError("Not a valid email")
+		if not ".com" or ".edu" or ".gov" in email:
+			raise forms.ValidationError("Not a valid email")
 		return email
 
 
@@ -58,11 +60,17 @@ class RegisterForm(forms.Form):
 		qs = User.objects.filter(email=email)
 		if qs.exists():
 			raise forms.ValidationError("Email is taken.")
+		if not "@" in email:
+			raise forms.ValidationError("Not a valid email")
+		if not ".com" or ".edu" or ".gov" in email:
+			raise forms.ValidationError("Not a valid email")
 		return email
 
 	def clean(self):
 		data = self.cleaned_data
 		password = self.cleaned_data.get('password')
+		if len(password) < 8:
+			raise forms.ValidationError("Password must be at least 8 characters")
 		password2 = self.cleaned_data.get('password2')
 		if password2 != password:
 			raise forms.ValidationError("Passwords must match.")

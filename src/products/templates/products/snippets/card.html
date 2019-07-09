@@ -1,8 +1,30 @@
 <style>
 .card-img-top{
     height: 350px;
- 	overflow: hidden;
 }
+.card-stamp{
+	font-size:10px;
+}
+.card-title{
+	font-size:90%;
+	font-weight: bold;
+}
+.card-description{
+	font-size:90%;
+}
+.card-price{
+	font-size:90%;
+	font-weight: bold;
+}
+.link{
+	color: black;
+   text-decoration: none; 
+   background-color: none;
+}
+.link:hover {
+    text-decoration: underline;
+}
+
 </style>
 
 <div class="card" style="width: 18rem;">
@@ -12,10 +34,17 @@
   		</a>
   		{% endif %}
   	<div class="card-body">
+		<p class="card-stamp">{{ instance.timestamp}}</p>
+		<hr align="center" width="100%">
+		<a href="{{ instance.get_absolute_url }}">
+		<div class ="link">
     	<h5 class="card-title">{{ instance.title}}</h5>
-    	<p class="card-text">{{ instance.description}}</p>
-		<a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a>
-		<p class="card-text">${{ instance.price}}</p>
+		<p class="card-description">{{ instance.description}}</p>
+		</div></a>
+		
+		<!-- <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a> -->
+		<p class="card-price">${{ instance.price}}</p>
+	
       <!-- <a href="{% url 'products:detail' slug=instance.slug %}" class="btn btn-warning">URL shortcut</a> -->
   	</div>
 </div>
