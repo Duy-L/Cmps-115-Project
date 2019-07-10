@@ -34,10 +34,14 @@
 .link:link{
     text-decoration: none;
 }
-
+.card{
+	display: grid;
+	width:17rem;
+	border:none;
+}
 </style>
 
-<div class="card" style="width: 17rem; border: none;">
+<div class="card">
 	{% if instance.image %}
 		<a href="{{ instance.get_absolute_url }}">
   			<img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }}">
