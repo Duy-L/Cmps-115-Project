@@ -33,21 +33,23 @@
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'products:list' %}">Sell</a>
       </li>
-      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'login' %}">Login</a>
-      </li>
+      
       {% if request.user.is_authenticated %}
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {{user.username}}
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">Account Profile</a>
               <!-- <a class="dropdown-item" href="#">Sell Item</a> -->
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </div>
         </li>
       {% else %}
+        <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'login' %}">Login</a>
+        </li>
       <!-- <li class="nav-item {% if request.path == register_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'register' %}">Register</a>
       </li> -->
