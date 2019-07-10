@@ -20,14 +20,24 @@
 	color: black;
    text-decoration: none; 
    background-color: none;
+   
 }
-.link:hover {
-    text-decoration: underline;
+.link:hover{
+    text-decoration: none;
+}
+.link:visited{
+    text-decoration: none;
+}
+.link:active{
+    text-decoration: none;
+}
+.link:link{
+    text-decoration: none;
 }
 
 </style>
 
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 17rem; border: none;">
 	{% if instance.image %}
 		<a href="{{ instance.get_absolute_url }}">
   			<img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }}">

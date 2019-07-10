@@ -60,7 +60,7 @@ class RegisterForm(forms.Form):
 		qs = User.objects.filter(email=email)
 		if qs.exists():
 			raise forms.ValidationError("Email is taken.")
-		
+
 		return email
 
 	def clean(self):

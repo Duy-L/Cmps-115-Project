@@ -6,33 +6,24 @@
 	height:auto;
 	width:auto;
 }
+
 </style>
 
 	<div class='row'>
 
 {% for obj in object_list %}
-	<div class="col">
-		{{ forloop.counter }}
+	<div class='col'>
 		{% include 'products/snippets/card.html' with instance=obj %}
 
-
-		{% if forloop.counter|divisibleby:3 %}
-			</div><div class='grid'>
-				<!-- <style>
-				.grid{
-					display: grid;
-					grid-template-columns: 100px auto 200px;
-					grid-template-rows: repeat(3, 100px);
-					grid-gap: 2em;
-				}
-				</style> -->
+		<!-- {% if forloop.counter|divisibleby:3 %} -->
 			</div>
+			<div class="grid"> </div>
 		
-		{% else %}
+		<!-- {% else %} -->
 			</div>
-		{% endif %}
+		<!-- {% endif %} --> 
 
 	{% endfor %}
-	</div>
+	
 
 {% endblock %}
