@@ -2,8 +2,10 @@
 .card-img-top{
     height: 350px;
 }
+
 .card-stamp{
 	font-size:10px;
+	height:5px;
 }
 .card-title{
 	font-size:90%;
@@ -22,18 +24,6 @@
    background-color: none;
    
 }
-.link:hover{
-    text-decoration: none;
-}
-.link:visited{
-    text-decoration: none;
-}
-.link:active{
-    text-decoration: none;
-}
-.link:link{
-    text-decoration: none;
-}
 .card{
 	display: grid;
 	width:17rem;
@@ -45,12 +35,12 @@
 	{% if instance.image %}
 		<a href="{{ instance.get_absolute_url }}">
   			<img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }}">
-  		</a>
+  		</a> 
   		{% endif %}
   	<div class="card-body">
 		<p class="card-stamp">{{ instance.timestamp}}</p>
 		<hr align="center" width="100%">
-		<a href="{{ instance.get_absolute_url }}">
+		<a style="text-decoration:none" href="{{ instance.get_absolute_url }}">
 		<div class ="link">
     	<h5 class="card-title">{{ instance.title}}</h5>
 		<p class="card-description">{{ instance.description}}</p>

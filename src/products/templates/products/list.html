@@ -2,27 +2,27 @@
 
 {% block content %}
 <style>
-.prod{
+.col{
 	display: grid;
-	grid-template-columns: 100px 50px 100px;
-	grid-template-rows: 80px auto 80px; 
-	/* grid-column-gap: 10px; */
-	grid-row-gap: 15px;
+	justify-content: center;
+	align-items: center;
+	
 }
-
 </style>
-<div class = "prod">
+
 	<div class='row'>
 
 {% for obj in object_list %}
-	<div class='col'>
+	<div class="col">
 		{% include 'products/snippets/card.html' with instance=obj %}
 
-		{% if forloop.counter|divisibleby:3 %}
+		{% if forloop.counter %}
 			</div>
-			<div class="grid"> </div>
+			<div class="grid"></div>
+			
 		
 		{% else %}
+		
 			</div>
 		{% endif %} 
 

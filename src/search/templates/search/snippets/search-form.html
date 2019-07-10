@@ -1,8 +1,78 @@
+<!DOCTYPE html>
+<html>
+<style>
+.testing{
+	position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    transition: all 1s;
+    width: 32px;
+    height: 54px;
+    background: white;
+    box-sizing: border-box;
+    border-radius: 25px;
+    border: 3px solid white;
+    padding: 2px;
+}
+.testing:hover{
+    width: 280px;
+    cursor: pointer;
+}
+
+.testing:hover #first{
+    display: block;
+}
+
+.testing:hover .fa{
+    background: #07051a;
+    color: white;
+}
+#first{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 42.5px;
+    line-height: 30px;
+    outline: 0;
+    border: 0;
+    display: none;
+    font-size: 1em;
+    border-radius: 20px;
+    padding: 0 20px;
+}
+.fa{
+    box-sizing: border-box;
+    padding: 10px;
+    width: 42.5px;
+    height: 42.5px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 60%;
+    color: black;
+    text-align: center;
+    font-size: 1.2em;
+    transition: all 1s;
+}
+</style>
+		
+
 <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
-  	<div class ='input-group'>
-	  	<input class="form-control" type="text" placeholder="Search" name='q' aria-label="Search" value='{{ request.GET.q }}'>
-	  	<span class='input-group-btn'>
-	  		<button class="btn btn-outline-success" type="submit">Search</button>
-		  </span>
-		</div>
+	<div class ="testing">
+	<div class ='input-group'>
+	
+	  	<input class="form-control" type="text" ID="first" placeholder="Search Designers & More" name='q' aria-label="Search" value='{{ request.GET.q }}' >
+	
+		  <span class='input-group-btn'></span>
+		  
+	  		<button class="btn btn-light" type="search" ID="second" ><i class="fa fa-search"></i> </button>
+		  
+		</span>
+	</div>
+	</div>
+	
 </form>
+
+
+</html>

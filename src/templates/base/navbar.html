@@ -7,16 +7,15 @@
 {% url 'cart:home' as cart_url %}
 
 
-
   <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-light mb-3" style="background-color: #FFFFFF;">
   <div class='container'>
   <a class="navbar-brand" href="{% url 'home' %}"> 
-    <img src="{% static 'img/wabisabi.png' %}" width="120" height="60" class="d-inline-block align-top" alt="">
+    <img src="{% static 'img/wabisabi.png' %}" width="110" height="60" class="d-inline-block align-top" alt="">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
+  
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       {% include 'search/snippets/search-form.html' %}
@@ -29,7 +28,7 @@
         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
       </li> -->
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'products:list' %}">Buy</a>
+        <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
       </li>
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'products:list' %}">Sell</a>
