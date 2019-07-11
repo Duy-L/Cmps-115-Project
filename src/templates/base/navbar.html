@@ -5,6 +5,7 @@
 {% url 'login' as login_url %}
 <!-- {% url 'register' as register_url %} -->
 {% url 'cart:home' as cart_url %}
+{% url 'products:product-create' as create_url %}
 
 
   <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-light mb-12" style="background-color: #FFFFFF;">
@@ -30,8 +31,8 @@
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
       </li>
-      <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'products:list' %}">Sell</a>
+      <li class="nav-item {% if request.path == create_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'products:product-create' %}">New Product</a>
       </li>
       <li class="nav-item {% if request.path == featured_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'featured' %}"><i class="fas fa-star"></i></a>
