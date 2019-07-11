@@ -1,9 +1,18 @@
 from django.http import Http404
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 
 from carts.models import Cart
-from .models import Product
+from .models import Product, ProductForm
+
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
 
 
 class ProductFeaturedListView(ListView):
@@ -42,7 +51,24 @@ def product_list_view(request):
 	}
 	return render(request, "products/list.html", context)
 
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    model = Product
+    fields = ['title', 'description', 'price', 'image']
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+def product_create_view(request):
+	product_form = ProductForm(request.POST or None)
+	context = {
+		"title":"Contact Page",
+		"content":"Welcome to the new product page.",
+		"form": product_form,
+	}
+	if product_form.is_valid():
+			print(product_form.cleaned_data)
+	return render(request, "products/product_form.html", context)
 
 class ProductDetailSlugView(DetailView):
 	queryset = Product.objects.all()
