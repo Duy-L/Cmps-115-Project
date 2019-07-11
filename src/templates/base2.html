@@ -8,11 +8,37 @@
 	    	<title>Wabi-Sabi</title>
 		    {% include 'base/css.html' %}
 		    {% block base_head %}{% endblock %}
+		    <style>
+		    	.box1{
+		    		height: 40vh;
+		    		width: 100%;
+		    		background-image: url('{% static 'img/banner.jpg' %}');
+		    		background-attachment: fixed;
+		    		background-size: cover;
+		    		background-position: top;
+		    		background-repeat: no-repeat;
+		    		display: table;
+		    		
+		    	}
+
+		    	h1{
+		    		font-family: sans-serif;
+		    		font-size: 48px;
+		    		color: #fff;
+		    		margin: 0px;
+		    		text-align: center;
+		    		display: table-cell;
+		    		vertical-align: middle;
+		    	}
+		    </style>
 	  	</head>
 
 	  	<body>
 		  	{% include 'base/navbar.html' with brand_name='Wabi-Sabi' %}
 
+		  	<div class="box1">
+		  		<h1> Buy and Sell with Wabi-Sabi </h1>
+		  	</div>
 
 	  			{% block content %}{% endblock %}
 
