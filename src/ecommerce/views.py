@@ -38,7 +38,10 @@ def contact_page(request):
 	# 	print(request.POST.get('fullname'))
 	# 	print(request.POST.get('email'))
 	# 	print(request.POST.get('content'))
-	return render(request, "contact/view.html", context)
+	return render(request, "contact/view.html")
+
+def profile_page(request):
+	return render(request,"home_page.html" )
 
 def login_page(request):
 	form = LoginForm(request.POST or None)

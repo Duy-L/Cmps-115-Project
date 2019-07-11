@@ -1,18 +1,23 @@
 {% extends "base.html" %}
-
+{% load socialaccount %}
 {% block content %}
 <style>
-.loginform{
-	align-items: center;
+.id{
+	
 }
 </style>
 
-<div class ="loginform">
-<h2>Login</h2>
+<h2>Sign Up or Login</h2>
+	<br>
 	<form method='POST'> 
 		{% csrf_token %}
 		{{ form.as_p }}
-		<button type='submit' class='btn btn-danger'>Login</button>
+	
+		<button type='submit' class='button'>Login</button>
+
+		<a href ="register.html">yes
+	<br> <br>
+		<a href="{% provider_login_url 'google' %}" class ="btn btn-primary">Log In with Gmail</a>
 	</form>
 </div>
 {% endblock %}
