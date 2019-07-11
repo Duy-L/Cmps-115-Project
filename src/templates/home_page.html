@@ -12,15 +12,20 @@
 
 <div class='row'>
     <div class='col'>
-    	
-    	<!-- <img src="{% static 'img/mscott.png' %}" class='img-fluid' width="100%"/> -->
-    	<p>{{ content }}</p>
+
+    	<h2>{{ content }}</h2>
+
+    	<div class="container2">
+		  		<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
+		  		<div class="overlay">
+		    	<div class="text"><a href="">Tops</a></div>
+		  		</div>
+		</div>
 	</div>
 </div>
 
 <div class='text-center'>
-	<h1 >{{ title }}</h1>
-	<h1>Currently underconstruction rn :( </h1>
+	
 </div>
 
 <!--Shows how to display something only if the user is logged in 
