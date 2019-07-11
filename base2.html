@@ -1,0 +1,103 @@
+{% load static %}
+<!doctype html>
+	<html lang="en">
+		<head>
+	    	<!-- Required meta tags -->
+	    	<meta charset="utf-8">
+	    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    	<title>Wabi-Sabi</title>
+		    {% include 'base/css.html' %}
+		    {% block base_head %}{% endblock %}
+		    <style>
+		    	.box1{
+		    		height: 40vh;
+		    		width: 100%;
+		    		background-image: url('{% static 'img/banner.jpg' %}');
+		    		background-attachment: fixed;
+		    		background-size: cover;
+		    		background-position: top;
+		    		background-repeat: no-repeat;
+		    		display: table;
+		    		
+		    	}
+
+		    	h1{
+		    		font-family: sans-serif;
+		    		font-size: 48px;
+		    		color: #fff;
+		    		margin: 0px;
+		    		text-align: center;
+		    		display: table-cell;
+		    		vertical-align: middle;
+		    	}
+
+		    	h2{
+		    		font-family: sans-serif;
+		    		font-size: 30px;
+		    		color: #000;
+		    		margin: 0px;
+		    		text-align: center;
+		    		display: table-cell;
+		    		vertical-align: left;
+		    		padding-left: 30px;
+		    		padding-top: 30px;
+		    	}
+
+		    	.container2 {
+				  	position: absolute;
+				  	width: 50%;
+				  	display: table-cell;
+		    		vertical-align: left;
+		    		
+				}
+
+				.category_pic {
+				  display: block;
+				  width: 100%;
+				  height: auto;
+				}
+
+				.overlay {
+				  position: absolute;
+				  top: 0;
+				  bottom: 0;
+				  left: 0;
+				  right: 0;
+				  height: 100%;
+				  width: 100%;
+				  opacity: 0;
+				  transition: .5s ease;
+				  background-color: #000;
+				}
+
+				.container2:hover .overlay {
+				  opacity: 1;
+				}
+
+				.text {
+				  color: white;
+				  font-size: 20px;
+				  position: absolute;
+				  top: 50%;
+				  left: 50%;
+				  -webkit-transform: translate(-50%, -50%);
+				  -ms-transform: translate(-50%, -50%);
+				  transform: translate(-50%, -50%);
+				  text-align: center;
+				}
+		    </style>
+	  	</head>
+
+	  	<body>
+		  	{% include 'base/navbar.html' with brand_name='Wabi-Sabi' %}
+
+		  	<div class="box1">
+		  		<h1> Buy and Sell with Wabi-Sabi </h1>
+		  	</div>
+
+	  			{% block content %}{% endblock %}
+
+
+	  		{% include 'base/js.html' %}
+	  	</body>
+	</html>
