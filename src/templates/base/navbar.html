@@ -4,6 +4,7 @@
 {% url 'login' as login_url %}
 {% url 'register' as register_url %}
 {% url 'cart:home' as cart_url %}
+{% url 'products:product-create' as create_url %}
 
   <nav class="navbar navbar-expand-lg navbar-light navbar-dark bg-dark mb-3">
   <div class='container'>
@@ -33,7 +34,9 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">Account Profile</a>
-              <a class="dropdown-item" href="#">Sell Item</a>
+              <a class="nav-item {% if request.path == create_url %}active{% endif %}">
+                <a class="dropdown-item" href="{% url 'products:product-create' %}">New Product</a>
+              </a>
               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </div>
       </li>
