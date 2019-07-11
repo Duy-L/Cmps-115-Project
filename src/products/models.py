@@ -1,9 +1,14 @@
 import random
 import os
 from django.db import models
+from django import forms
 from django.db.models.signals import pre_save, post_save
 from django.urls import reverse
+from django.contrib.auth.models import User
 from django.db.models import Q
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 from .utils import unique_slug_generator
 
@@ -20,7 +25,11 @@ def upload_image_path(instance, filename):
 			new_filename=new_filename, 
 			final_filename=final_filename
 			)
-
+class ProductForm(forms.Form):
+	name = forms.CharField()
+	description = forms.CharField()
+	price = forms.BooleanField()
+	image = forms.ImageField()
 
 #EVERY TIME YOU SAVE YOUR MODEL YOU MUST MAKEMIGRATIONS AND MIGRATE IN TERMINAL
 #No underscores in name, names singular eg. Product not Products
