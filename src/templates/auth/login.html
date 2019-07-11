@@ -2,22 +2,19 @@
 {% load socialaccount %}
 {% block content %}
 <style>
-.id{
+.first{
 	
 }
 </style>
 
-<h2>Sign Up or Login</h2>
+<h2>Login</h2>
 	<br>
 	<form method='POST'> 
 		{% csrf_token %}
 		{{ form.as_p }}
-	
-		<button type='submit' class='button'>Login</button>
-
-		<a href ="register.html">yes
+		<button type='submit' class='btn btn-info '>Login</button>
+		<a href="{% url 'register' %}" class ="btn btn-danger">Sign Up</a>
 	<br> <br>
-		<a href="{% provider_login_url 'google' %}" class ="btn btn-primary">Log In with Gmail</a>
+		<a href="{% provider_login_url 'google' %}" class ="btn btn-warning">Log In with Gmail</a>
 	</form>
-</div>
 {% endblock %}

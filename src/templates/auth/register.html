@@ -2,8 +2,8 @@
 {% load socialaccount %}
 {% block content %}
 	<h2>Sign up</h2>
-
 	<form method='POST'> 
+		<br> 
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button type='submit' class='btn btn-danger'>Sign up</button>
