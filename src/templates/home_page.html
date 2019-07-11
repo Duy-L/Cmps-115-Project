@@ -8,96 +8,46 @@
 {% endblock %}
 
 {% block content %}
-<style>
-.grid-container {
-	display: grid;
-	grid-template-columns: auto auto auto auto auto;
-	grid-gap: 10px;
-	padding: 20px;
-	width: 100%;
 
-  }
-
-.overlay {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	height: 100%;
-	width: 100%;
-	opacity: 0;
-	transition: .5s ease;
-	background-color: #000;
-} 
-
-.overlay:hover{
-	opacity: 1;
-}
-
-.text {
-	color: white;
-	font-size: 20px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-webkit-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
-	text-align: center;
-}
-	
-}
-  
-</style>
-	<h2>{{ content }}</h2>
-	
-<div class="grid-container">
-		<div>
-			<div class="overlay">
-			<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
-			
-				<a class = "text" href="search/?q=jacket">Jacket</a>
+    	<h2>{{ content }}</h2>
+    	<div class="grid-container">
+	    	<div class="container2">
+			  		<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
+			  		<div class="overlay">
+			    	<div class="text"><a href="/search/?q=outerwear">Outerwear</a></div>
+			  		</div>
 			</div>
-		
-		</div>
-<!-- ------------------------------------------------------------------------------------------- -->
-		<div>
-			<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
-			
-				<div class="text"><a href="search/?q=jacket">Jacket</a>
-				</div>
-			
-		</div>
-<!-- ------------------------------------------------------------------------------------------- -->
-		<div>
-				<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
-			
-					<div class="text"><a href="search/?q=jacket">Jacket</a>
+
+	    	<div class="container2">
+			  		<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
+			  		<div class="overlay">
+			    	<div class="text"><a href="/search/?q=tops">Tops</a></div>
+			  		</div>
+			</div>
+
+			<div class="container2">
+					<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
+					<div class="overlay">
+				  <div class="text"><a href="/search/?q=bottoms">Bottoms</a></div>
 					</div>
+		   </div>
+
+		   <div class="container2">
+				<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
+				<div class="overlay">
+			  <div class="text"><a href="/search/?q=footwear">Footwear</a></div>
 				</div>
 			</div>
-<!-- ------------------------------------------------------------------------------------------- -->
-	<div>
-			<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
-			
-				<div class="text"><a href="search/?q=jacket">Jacket</a>
+			<div class="container2">
+				<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
+				<div class="overlay">
+				<div class="text"><a href="/search/?q=accessories">Accessories</a></div>
 				</div>
-			
+			  </div>
+	  </div>
+
 		</div>
 
-
-<!-- ------------------------------------------------------------------------------------------- -->
-	<div>
-			<img src='{% static "img/mscott.png" %}' alt="Avatar" class="category_pic">
-			<div class="overlay">
-				<div class="text"><a href="search/?q=jacket">Jacket</a>
-				</div>
-			</div>
-		</div>
-
-<!-- ------------------------------------------------------------------------------------------- -->
-	</div>
 
 <div class='text-center'>
 	
@@ -111,8 +61,6 @@
 	{{ premium_content }}
 	</div>
 </div>
-
 {% endif %}-->
 
 {% endblock %}
-
