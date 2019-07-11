@@ -4,7 +4,7 @@
 
 <div class='text-center'>
 	<h1 >{{ title }}</h1>
-	<h1>Hello, world! Make a new Product</h1>
+	<h1>Create new listing</h1>
 </div>
 <div class='container'>
 	<div class='row'>
@@ -13,8 +13,10 @@
     		<div class='col-sm-6 col-12'>
 
     		<form method='POST'> {% csrf_token %}
-	    		{{ form }}
-	    		<button type='submit' class='btn btn-primary'>Post</button>
+				{{ form }}
+				<br>
+				<br>
+	    		<button type='submit' class='btn btn-danger'>Post</button>
 	    	</form>
 
     		</div>

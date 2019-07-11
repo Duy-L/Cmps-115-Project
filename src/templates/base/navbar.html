@@ -31,11 +31,19 @@
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
       </li>
+      {% if request.user.is_authenticated %}
       <li class="nav-item {% if request.path == create_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'products:product-create' %}">New Product</a>
+        <a class="nav-link" href="{% url 'products:product-create' %}">Sell</a>
       </li>
+          {% else %}
+      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+          <a class="nav-link" href="{% url 'login' %}">Sell</a>
+      </li>
+
+          {% endif %}
       <li class="nav-item {% if request.path == featured_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'featured' %}"><i class="fas fa-star"></i></a>
+        
       </li>
       
       {% if request.user.is_authenticated %}

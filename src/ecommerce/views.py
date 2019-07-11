@@ -10,8 +10,7 @@ def home_page(request):
 	#	return Login
 	#print(request.session.get("first_name", "Unknown"))
 	context = {
-		"title":"Hello World!",
-		"content":"Welcome to the homepage.",
+		"content": "Shop by Category",
 	}
 	if request.user.is_authenticated():
 		context["premium_content"] = "YEAHHHHH"
