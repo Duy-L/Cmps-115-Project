@@ -10,4 +10,5 @@ pip3 install -r requirements.txt
 cd src
 Pip3 install pipenv
 pipenv install django-allauth
+
 python3 manage.py migrate
