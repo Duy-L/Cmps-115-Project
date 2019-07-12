@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^featured/$', ProductFeaturedListView.as_view(), name='featured'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile', profile_page, name='profile_page'),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
 ]
 
 

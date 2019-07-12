@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'products',
     'search',
     'tags',
+    'paypal.standard.ipn',
+    'payment',
 ]
 
 
@@ -152,3 +154,7 @@ SITE_ID = 1
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+#Django Paypal settings
+PAYPAL_RECEIVER_EMAIL = 'azeynalo@ucsc.edu'
+PAYPAL_TEST = True
