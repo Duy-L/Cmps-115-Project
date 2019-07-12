@@ -10,11 +10,7 @@ def home_page(request):
 	#	return Login
 	#print(request.session.get("first_name", "Unknown"))
 	context = {
-<<<<<<< HEAD
 		"content": "Shop by Category",
-=======
-		"content":"Categories",
->>>>>>> 02328913fd47c158ad06206fe4cfd429b0d5523b
 	}
 	if request.user.is_authenticated():
 		context["premium_content"] = "YEAHHHHH"
