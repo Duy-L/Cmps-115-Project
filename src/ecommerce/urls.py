@@ -27,7 +27,6 @@ from products.views import(
     ProductFeaturedDetailView
 )
 urlpatterns = [
-    url(r'^$', home_page, name='home'),
     url(r'^about/$', about_page, name='about'),
     url(r'^contact/$', contact_page, name='contact'),
     url(r'^login/$', login_page, name='login'),
@@ -41,7 +40,9 @@ urlpatterns = [
     url(r'^featured/$', ProductFeaturedListView.as_view(), name='featured'),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile', profile_page, name='profile_page'),
+    url(r'^orders/', include('orders.urls', namespace='orders')),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^$', home_page, name='home'),
 ]
 
 

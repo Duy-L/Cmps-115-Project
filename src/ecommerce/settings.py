@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'products',
     'search',
     'tags',
+    'orders',
     'paypal.standard.ipn',
     'payment',
 ]
