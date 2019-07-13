@@ -2,22 +2,34 @@
 
 {% block content %}
 
+<style>
+.overall{
+
+}
+</style>
+
+
 <div class='row'>
 	<div class='col-12 col-md-6'>
 		<!-- <h1>{{ object.title }}</h1>
-		 {{ object.timestamp|timesince }} ago
-		 {{ object.description|linebreaks }} <br/> -->
-		 {% if object.image %}
+		{{ object.timestamp|timesince }} ago
+		{{ object.description|linebreaks }} <br/> -->
+		{% if object.image %}
 			<img src='{{ object.image.url }}' class='img-fluid'/> 
-		 {% endif %}
+		{% endif %}
 	</div>
 	<div class ='col-12 col-md-6'>
-		<h1>{{ object.title }}</h1>
-		{{ object.timestamp|timesince }} ago
-		{{ object.description|linebreaks }} <br/>
-		{% include 'products/snippets/update-cart.html' with product=object cart=cart %}
-		<!-- {% include 'products/snippets/featured-cart.html' with product=object %} -->
-	
+		<div class ="overall">
+			<h2>{{ object.title }}</h2>
+			<p class = "timestamp">{{ object.timestamp|timesince }} ago </p>
+			{{ object.description|linebreaks }}
+			<strong>${{ object.price}}</strong>
+			<br>
+			<br>
+			{% include 'products/snippets/update-cart2.html' with product=object cart=cart %}
+			<!-- {% include 'products/snippets/featured-cart.html' with product=object %} -->
+		</div>
+		
 	</div>
 </div>
 
