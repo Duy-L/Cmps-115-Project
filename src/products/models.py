@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import get_user_model
+import django_filters
 
 User = get_user_model()
 
@@ -89,6 +90,10 @@ class Product(models.Model):
 
 	def __unicode__(self):
 		return self.title
+	
+	def sorted_by_date(self):
+		return self.Product_set.order_by('timestamp')
+
 
 
 def product_pre_save_receiver(sender, instance, *args, **kwargs):

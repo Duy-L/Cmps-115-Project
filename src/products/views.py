@@ -16,7 +16,7 @@ from django.views.generic import (
 
 
 class ProductFeaturedListView(ListView):
-	template_name = "products/list.html"
+	template_name = "products/featured-detail.html"
 
 	def get_queryset(self, *args, **kwargs):
 		request = self.request
@@ -50,6 +50,36 @@ def product_list_view(request):
 		'object_list': queryset
 	}
 	return render(request, "products/list.html", context)
+
+def product_by_price_lowest(request):
+	queryset = Product.objects.all().order_by('price')
+	context = {
+		'object_list':queryset
+	}
+	return render(request, "products/price.html", context)
+
+def product_by_price_highest(request):
+	queryset = Product.objects.all().order_by('-price')
+	context = {
+		'object_list':queryset
+	}
+	return render(request, "products/price.html", context)
+
+def product_by_date_oldest(request):
+	queryset = Product.objects.all().order_by('timestamp')
+	context = {
+		'object_list':queryset
+	}
+	return render(request, "products/price.html", context)
+
+def product_by_date_newest(request):
+	queryset = Product.objects.all().order_by('-timestamp')
+	context = {
+		'object_list':queryset
+	}
+	return render(request, "products/price.html", context)
+
+
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
@@ -139,3 +169,4 @@ def product_detail_view(request, pk=None, *args, **kwargs):
 		'object': instance
 	}
 	return render(request, "products/detail.html", context)
+

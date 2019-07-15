@@ -1,5 +1,36 @@
-{{ object.title }} <br/>
-{{ object.description }} <br/>
-{% if object.image %}
-	<img src='{{ object.image.url }}' class='img-fluid'/>
-{% endif %}
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.col{
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
+h3{
+	text-align:center;
+}
+
+</style>
+
+<h3>Staff Pick</h3>
+<div class='row'>
+
+{% for obj in object_list %}
+	<div class="col">
+		{% include 'products/snippets/card.html' with instance=obj %}
+
+		{% if forloop.counter %}
+			</div>
+			<div class="grid"></div>
+			
+		
+		{% else %}
+			
+			</div>
+		{% endif %} 
+
+	{% endfor %}
+	
+</div>
+{% endblock %}

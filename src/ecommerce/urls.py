@@ -24,7 +24,11 @@ from django.views.generic import TemplateView
 from .views import home_page, about_page, contact_page, login_page, register_page, logout_page, profile_page
 from products.views import(
     ProductFeaturedListView,
-    ProductFeaturedDetailView
+    ProductFeaturedDetailView,
+    product_by_price_lowest,
+    product_by_price_highest,
+    product_by_date_oldest,
+    product_by_date_newest,
 )
 urlpatterns = [
     url(r'^$', home_page, name='home'),
@@ -43,6 +47,10 @@ urlpatterns = [
     url(r'^accounts/profile', profile_page, name='profile_page'),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url(r'^payment/', include('payment.urls', namespace='payment')),
+    url(r'^lowestprice/$', product_by_price_lowest, name='lowestprice'),
+    url(r'^highestprice/$', product_by_price_highest, name='highestprice'),
+    url(r'^oldestdate/$', product_by_date_oldest, name='oldestdate'),
+    url(r'^newestdate/$', product_by_date_newest, name='newestdate'),
 ]
 
 

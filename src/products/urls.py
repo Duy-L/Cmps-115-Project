@@ -5,7 +5,8 @@ from .views import (
     ProductDetailSlugView, 
     ProductFeaturedDetailView,
     ProductFeaturedListView,
-    ProductCreateView
+    ProductCreateView,
+   
     )
 
 
@@ -14,6 +15,7 @@ urlpatterns = [
     url(r'new', ProductCreateView.as_view(), name='product-create'),
     url(r'^(?P<slug>[\w-]+)/$', ProductDetailSlugView.as_view(), name='detail'),
     url(r'^featured/$', ProductFeaturedDetailView.as_view(), name='featured'),
+    
 ]
 
 

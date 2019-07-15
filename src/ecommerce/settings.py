@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'tags',
     'paypal.standard.ipn',
     'payment',
+    'django_filters'
 ]
 
 
@@ -148,6 +149,8 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
+
+
 
 SITE_ID = 1
 
