@@ -12,8 +12,8 @@
     		<p>{{ content }}</p>
     		<div class='col-sm-6 col-12'>
 
-    		<form method='POST'> {% csrf_token %}
-				{{ form }}
+    		<form enctype="multipart/form-data" method='POST'> {% csrf_token %}
+				{{ form.as_p }}
 				<br>
 				<br>
 	    		<button type='submit' class='btn btn-danger'>Post</button>
