@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from carts.models import Cart
 from .models import Product, ProductForm
@@ -79,18 +79,36 @@ def product_by_date_newest(request):
 	}
 	return render(request, "products/price.html", context)
 
+class UserProductListView(ListView):
+	template_name = "products/user_list.html"
 
+	# def get_context_data(self, *args, **kwargs):
+	# 	context = super(ProductListView, self).get_context_data(*args, **kwargs)
+	# 	print(context)
+	# 	return context
+
+	def get_queryset(self, *args, **kwargs):
+		request = self.request
+		return Product.objects.all()
+
+
+def user_product_list_view(request):
+	queryset = Product.objects.all()
+	context = {
+		'object_list': queryset
+	}
+	return render(request, "products/user_list.html", context)
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    fields = ['title', 'description', 'price', 'image']
+    fields = ['title', 'description', 'price', 'image', 'brand', 'article']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 def product_create_view(request):
-	product_form = ProductForm(request.POST or None)
+	product_form = ProductForm(request.POST, request.FILES)
 	context = {
 		"title":"Contact Page",
 		"content":"Welcome to the new product page.",
@@ -98,6 +116,7 @@ def product_create_view(request):
 	}
 	if product_form.is_valid():
 			print(product_form.cleaned_data)
+			#product_form.author = request.user
 	return render(request, "products/product_form.html", context)
 
 class ProductDetailSlugView(DetailView):
@@ -125,7 +144,51 @@ class ProductDetailSlugView(DetailView):
 			raise Http404("Ummm")
 		return instance
 
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Product
+    fields = ['title', 'description', 'price', 'image', 'brand', 'article']
 
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+def product_update_view(request, slug):
+	obj = get_object_or_404(Product, slug = slug)
+	product_form = ProductForm(instance=obj)
+	if product_form.is_valid():
+			print(product_form.cleaned_data)
+			product_form.author = request.user
+	context = {
+		"title":"Contact Page",
+		"content":"Welcome to the new product page.",
+		"form": product_form,
+	}
+	return render(request, "products/product_form.html", context)
+
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Product
+    success_url = '/'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+def product_delete_view (request,  slug):
+	obj = get_object_or_404(Product, slug = slug)
+	obj.delete()
+	queryset = Product.objects.all()
+	context = {
+		'object_list': queryset
+	}
+	return render(request, "products/user_list.html", context)
 
 class ProductDetailView(DetailView):
 	#queryset = Product.objects.all()
@@ -169,4 +232,3 @@ def product_detail_view(request, pk=None, *args, **kwargs):
 		'object': instance
 	}
 	return render(request, "products/detail.html", context)
-

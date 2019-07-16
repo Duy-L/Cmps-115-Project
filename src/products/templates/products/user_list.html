@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+.col{
+	display: grid;
+	justify-content: center;
+	align-items: center;
+	
+}
+</style>
+
+	<div class='row'>
+
+{% for obj in object_list %}
+	{% if obj.author == user %}
+	<div class="col">
+		{% include 'products/snippets/card.html' with instance=obj %}
+
+		{% if forloop.counter %}
+			</div>
+			<div class="grid"></div>
+			
+		
+		{% else %}
+		
+			</div>
+		{% endif %} 
+	{% endif %} 
+	{% endfor %}
+	
+</div>
+{% endblock %}

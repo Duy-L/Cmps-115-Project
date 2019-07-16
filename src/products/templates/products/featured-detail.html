@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 <style>
 .col{
@@ -10,10 +10,37 @@
 h3{
 	text-align:center;
 }
+.box1{
+	height: 40vh;
+	width: 100%;
+	background-image: url('{% static 'img/banner6.jpg' %}');
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: bottom;
+	background-repeat: no-repeat;
+	display: table;
+	
+}
+h1{
+	font-family: Euclid;
+	font-size: 48px;
+	color: #fff;
+	margin: 0px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: bottom;
+
+}
 
 </style>
 
-<h3>Staff Pick</h3>
+
+<div class="box1">
+	<h1><p style=" display: table-cell; padding: .5em; position: center;">
+	Curated Picks from Staff</p></h1>
+</div>
+<br>
+<br>
 <div class='row'>
 
 {% for obj in object_list %}

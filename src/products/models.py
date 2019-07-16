@@ -2,16 +2,34 @@ import random
 import os
 from django.db import models
 from django import forms
+from django.conf import settings
 from django.db.models.signals import pre_save, post_save
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import get_user_model
-
+from PIL import Image
 
 User = get_user_model()
 
 from .utils import unique_slug_generator
+
+BRANDS= [
+	('not seen', 'Not Seen'),
+    ('nike', 'Nike'),
+    ('adidas', 'Adidas'),
+    ('converse', 'Converse'),
+    ('levis', 'Levis'),
+    ]
+
+ARTICLES= [
+	('not seen', 'Not Seen'),
+	('Outerwear', 'Outerwear'),
+	('tops', 'Tops'),
+    ('bottoms', 'Bottoms'),
+    ('shoes', 'Shoes'),
+    ('accesories', 'Accesories'),
+    ]
 
 def get_filename_ext(filepath):
 	base_name = os.path.basename(filepath)
@@ -31,6 +49,7 @@ class ProductForm(forms.Form):
 	description = forms.CharField()
 	price = forms.BooleanField()
 	image = forms.ImageField()
+	brand = forms.CharField()
 
 #EVERY TIME YOU SAVE YOUR MODEL YOU MUST MAKEMIGRATIONS AND MIGRATE IN TERMINAL
 #No underscores in name, names singular eg. Product not Products
@@ -74,10 +93,13 @@ class Product(models.Model):
 	slug			= models.SlugField(blank=True, unique=True)
 	description		= models.TextField()
 	price 			= models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
-	image			= models.ImageField(upload_to=upload_image_path, null=True, blank=True)
+	image			= models.ImageField(upload_to=upload_image_path, default='default.png')
 	featured		= models.BooleanField(default=False)
 	active			= models.BooleanField(default=True)
 	timestamp		= models.DateTimeField(auto_now_add=True)
+	author 			= models.ForeignKey('auth.User', null=True, blank=True)
+	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'not seen')
+	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'not seen')
 
 	objects = ProductManager()
 
@@ -95,13 +117,8 @@ class Product(models.Model):
 		return self.Product_set.order_by('timestamp')
 
 
-
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
 	if not instance.slug:
 		instance.slug = unique_slug_generator(instance)
 
 pre_save.connect(product_pre_save_receiver, sender=Product)
-
-
-
-
