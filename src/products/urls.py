@@ -26,4 +26,3 @@ urlpatterns = [
     url(r'(?P<slug>[\w-]+)/delete', product_delete_view, name='product-delete'),
     url(r'(?P<slug>[\w-]+)/edit', ProductUpdateView.as_view(), name='product-edit'),
 ]
-
