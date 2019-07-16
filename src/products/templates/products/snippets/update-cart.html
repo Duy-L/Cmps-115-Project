@@ -1,7 +1,19 @@
+<style>
+.button1{
+   background-color: white;
+   color: black;
+   border: 1.5px solid #e7e7e7;
+   width: 70%;
+   font-size: 13px;
+}
+</style>
+
+
+
 <form method='POST' action='{% url "cart:update_remove" %}' class="form"> {% csrf_token %}
   <input type='hidden' name='product_id' value='{{ product.id }}' />
   {% if product in cart.products.all %}
-       <button type='submit' class="btn btn-danger" >remove</button>
+       <button class="button1" >Remove</button>
  
   {% endif %}
 

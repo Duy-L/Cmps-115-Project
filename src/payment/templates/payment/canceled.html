@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Your payment has not been processed</h1>
-    <p>There was a problem processing your payment.</p>
+    <br>
+    <h3>Your payment has not been processed</h3>
+    <a style="text-decoration:none" href="{% url 'cart:home' %}">Try again in checkout page</a>
 {% endblock %}

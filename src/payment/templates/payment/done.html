@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Your payment was successful!</h1>
-    <a class="nav-link" href="{% url 'products:list' %}">Click here to continue shopping</a>
+    <center>
+    <h3>Your payment was successful!</h3>
+    <a href="{% url 'products:list' %}" class="btn btn-warning" style="font-size: 14px;"> Continue Shopping</a>
+    </center>
    
 {% endblock %}
