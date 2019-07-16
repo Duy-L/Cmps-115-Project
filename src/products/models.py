@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.contrib.auth import get_user_model
-import django_filters
+
 
 User = get_user_model()
 

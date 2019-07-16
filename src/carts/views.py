@@ -27,7 +27,8 @@ def cart_update(request):
         cart_obj, new_obj = Cart.objects.new_or_get(request)
         if product_obj in cart_obj.products.all():
             cart_obj.products.remove(product_obj)
-        else:
+
+        elif product_obj not in cart_obj.products.all():
             cart_obj.products.add(product_obj) # cart_obj.products.add(product_id)
         request.session['cart_items'] = cart_obj.products.count()
         # return redirect(product_obj.get_absolute_url())

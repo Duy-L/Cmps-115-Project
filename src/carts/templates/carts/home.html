@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style>
+.checkout{
+  background-color:none;
+  color: white;
+}
+.checkout:hover{
+
+  text-decoration: none;
+}
+</style>
 <h1>Cart</h1>
 {% if cart.products.exists %}
 <table class="table">
@@ -33,7 +43,12 @@
       </tr>
     </tbody>
   </table>
-    <a href="{% url "payment:process" %}" class="button">Checkout</a>
+
+  <button style="margin-left:75%;" type="button" class="btn btn-success btn-lg">
+    <a style="text-decoration:none" href ="{% url 'payment:process' %}"><div class ="checkout">Checkout</div></a></button>
+
+
+
 {% else %}
 <p class ='lead'>Cart is empty</p>
 {% endif %}

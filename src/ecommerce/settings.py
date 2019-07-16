@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'tags',
     'paypal.standard.ipn',
     'payment',
-    'django_filters'
 ]
 
 
