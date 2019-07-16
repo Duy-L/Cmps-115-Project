@@ -99,13 +99,6 @@ def user_product_list_view(request):
 	}
 	return render(request, "products/user_list.html", context)
 
-def user_product_list_view(request):
-	queryset = Product.objects.all()
-	context = {
-		'object_list': queryset
-	}
-	return render(request, "products/user_list.html", context)
-
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     fields = ['title', 'description', 'price', 'image', 'brand', 'article']

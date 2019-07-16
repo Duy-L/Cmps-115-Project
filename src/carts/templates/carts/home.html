@@ -10,10 +10,82 @@
 
   text-decoration: none;
 }
+.title{
+  background-color:none;
+  color: black;
+  font-size:17px;
+  padding: 15px;
+}
+.title:hover{
+
+  text-decoration: none;
+}
+.h3{
+  text-align: center;
+}
+
 </style>
-<h1>Cart</h1>
+
+<h4><center>Your Cart</center></h4>
+
 {% if cart.products.exists %}
-<table class="table">
+<div class="container">
+	<table id="cart" class="table table-hover table-condensed">
+    				<thead>
+						<tr>
+							<th style="width:60%">Product</th>
+							<th style="width:15%">Price</th>
+							<th style="width:9%">Quantity</th>
+							<th style="width:22%" class="text-center">Subtotal</th>
+							<th style="width:10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+              {% for product in cart.products.all %}
+						<tr>
+							<td data-th="Product">
+								<div class="row">
+               
+									<div class="col-sm-2 hidden-xs"><img src="{{ product.image.url }}" width="150%" height="" alt="..." class="img-responsive"/></div>
+               
+                  <div class="col-sm-10">
+										<h4 class="nomargin">
+                      <a style="text-decoration: none" href='{{ product.get_absolute_url }}'> <div class ="title">{{ product.title }}</div></a>
+                    </h4>
+									</div>
+								</div>
+							</td>
+							<td data-th="Price">${{ product.price }}</td>
+							<td data-th="Quantity">
+                <div class="form-control text-center" value="1"> 1</div>
+              </td>
+              
+							<td data-th="Subtotal" class="text-center">${{ product.price }}</td>
+							<td class="actions" data-th="">
+								{% include 'products/snippets/update-cart.html' with product=product cart=cart %}					
+              </td>
+              {% endfor %}
+						</tr>
+          </tbody>
+					<tfoot>   
+						<tr>
+							<td><a href="{% url 'products:list' %}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+              <td colspan="2" class="hidden-xs"></td>
+              
+							<td class="hidden-xs text-center"><strong>Total ${{ cart.total }}</strong></td>
+							<td>
+                  <button type="button" class="btn btn-success btn-lg">
+                <a style="text-decoration:none" href ="{% url 'payment:process' %}"><div class ="checkout">Checkout</div></a></button>
+              </td>
+            </tr>
+          
+          </tfoot>
+           
+				</table>
+</div>
+
+
+<!-- <table class="table">
     <thead>
       <tr>
         <th>#</th>
@@ -34,23 +106,32 @@
       </tr>
         {% endfor %}
       <tr>
-        <td colspan="2"></td>
+        <td colspan="3"></td>
         <td><b>Subtotal</b> {{ cart.subtotal }}</td>
       </tr>
       <tr>
-        <td colspan="2"></td>
+        <td colspan="3"></td>
         <td><b>Total</b> {{ cart.total }}</td>
       </tr>
+      
+        <td colspan="3"></td>
+        <td>
+        <button type="button" class="btn btn-success btn-lg">
+          <a style="text-decoration:none" href ="{% url 'payment:process' %}"><div class ="checkout">Checkout</div></a></button>
+        </td>
+     
     </tbody>
-  </table>
+  </table> -->
 
-  <button style="margin-left:75%;" type="button" class="btn btn-success btn-lg">
-    <a style="text-decoration:none" href ="{% url 'payment:process' %}"><div class ="checkout">Checkout</div></a></button>
+  
 
 
 
 {% else %}
-<p class ='lead'>Cart is empty</p>
+<hr>
+<p><center>Your cart is currently empty.</p>
+<a href="{% url 'products:list' %}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</center></a>
+
 {% endif %}
 
 
