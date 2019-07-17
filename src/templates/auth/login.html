@@ -1,20 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
 {% load socialaccount %}
 {% block content %}
 <style>
-.first{
-	
+.box1{
+	height: 83.5%;
+	width: 100%;
+	background-image: url('{% static 'img/banner7.jpg' %}');
+	background-attachment: fixed;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	display: table;
+	padding: 20px;
+	position:absolute;
+    left: 0;
+    right: 0;
+}
+h1{
+	font-family: Euclid;
+	font-size: 48px;
+	color: #fff;
+	margin: 0px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: bottom;
+
 }
 </style>
 
-<h2>Login</h2>
-	<br>
-	<form method='POST'> 
-		{% csrf_token %}
-		{{ form.as_p }}
-		<button type='submit' class='btn btn-info '>Login</button>
-		<a href="{% url 'register' %}" class ="btn btn-danger">Sign Up</a>
-	<br> <br>
-		<a href="{% provider_login_url 'google' %}" class ="btn btn-warning">Log In with Gmail</a>
-	</form>
+	<div class="box1">
+		<p style=" display: table-cell; padding: 15em; position: center;">
+				
+				<h2>Login</h2>
+			
+				<form method='POST'>{% csrf_token %}
+					{{ form.as_p }}
+					<button type='submit' class='btn btn-info '>Login</button>
+					<a href="{% url 'register' %}" class ="btn btn-danger">Sign Up</a>
+				<br> <br>
+					<a href="{% provider_login_url 'google' %}" class ="btn btn-warning">Log In with Gmail</a>
+				</form>
+	</p>
+	</div>
+
+	
+
+	
 {% endblock %}

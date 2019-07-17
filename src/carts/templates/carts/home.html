@@ -36,7 +36,7 @@
 							<th style="width:60%">Product</th>
 							<th style="width:15%">Price</th>
 							<th style="width:9%">Quantity</th>
-							<th style="width:22%" class="text-center">Subtotal</th>
+							<th style="width:22%" class="text-center">Est. Shipping</th>
 							<th style="width:10%"></th>
 						</tr>
 					</thead>
@@ -46,7 +46,7 @@
 							<td data-th="Product">
 								<div class="row">
                
-									<div class="col-sm-2 hidden-xs"><img src="{{ product.image.url }}" width="150%" height="" alt="..." class="img-responsive"/></div>
+									<div class="col-sm-2 hidden-xs"><a href ='{{ product.get_absolute_url }}'><img src="{{ product.image.url }}" width="150%" height="" alt="..." class="img-responsive"/></a></div>
                
                   <div class="col-sm-10">
 										<h4 class="nomargin">
@@ -60,7 +60,7 @@
                 <div class="form-control text-center" value="1"> 1</div>
               </td>
               
-							<td data-th="Subtotal" class="text-center">${{ product.price }}</td>
+							<td data-th="Subtotal" class="text-center">$0</td>
 							<td class="actions" data-th="">
 								{% include 'products/snippets/update-cart.html' with product=product cart=cart %}					
               </td>
