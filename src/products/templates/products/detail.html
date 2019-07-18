@@ -29,7 +29,7 @@
 			<h2>{{ object.title }}</h2>
 			{{ object.timestamp|timesince }} ago
 			<br>
-			Posted by <strong><i>{{ object.author }}</i></strong>
+			Posted by <strong><i><a href="{% url 'products:user-products' author=object.author %}"> {{ object.author }}</a></i></strong>
 			<br>
 			<strong>${{ object.price}}</strong>
 			<br>
