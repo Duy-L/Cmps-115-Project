@@ -13,7 +13,8 @@ from .views import (
     ProductDeleteView,
     product_delete_view,
     product_update_view,
-    ProductUpdateView
+    ProductUpdateView,
+    user_profile_list_view
     )
 
 
@@ -25,4 +26,5 @@ urlpatterns = [
     url(r'^featured/$', ProductFeaturedDetailView.as_view(), name='featured'),
     url(r'(?P<slug>[\w-]+)/delete', product_delete_view, name='product-delete'),
     url(r'(?P<slug>[\w-]+)/edit', ProductUpdateView.as_view(), name='product-edit'),
+    url(r'profile/(?P<author>[\w-]+)$', user_profile_list_view, name = 'user-products'),
 ]
