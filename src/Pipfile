@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 django-allauth = "*"
+gunicorn = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.7"
