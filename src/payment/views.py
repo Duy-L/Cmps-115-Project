@@ -4,12 +4,11 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from carts.models import Cart
-
-from django.db import models
-from products.models import Product
+from products.views import product_delete_view
 
 
 def payment_process(request):
+    order_id = request.session.get('order_id')
     host = request.get_host()
 
     cart_obj, new_obj = Cart.objects.new_or_get(request)
@@ -27,7 +26,7 @@ def payment_process(request):
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': cart_obj.total,
         'item_name': itemNames,
-        'invoice': 'unique-invoice-id',
+        'invoice': str(order_id),
         'notify_url': 'http://{}{}'.format(host, reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host, reverse('payment:done')),
         'cancel_return': 'http://{}{}'.format(host, reverse('payment:canceled')),
@@ -43,12 +42,9 @@ def payment_done(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     products = cart_obj.products.all()
     for product in products:
-        print(product.id, product.active)
-        product_obj = Product.objects.get(id=product.id)
-        print(product_obj)
-        
-        #TODO: NEED TO ADD A WAY TO MARK PRODUCTS ACITVE TO FALSE
-        product_obj.active = False
+        product_delete_view(request, product.slug)
+
+        request.session['cart_items'] = cart_obj.products.count()
 
     return render(request, 'payment/done.html')
 
