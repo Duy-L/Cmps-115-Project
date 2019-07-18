@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'c+o%s63y#c1cq+feuw77e93nv4c(+&r369pnne$@n6p9^a5fed'
-
+EMAIL_HOST_PASSWORD = os.environ.get('cmps115')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -96,9 +96,9 @@ DATABASES = {
 }
 
 import dj_database_url
-db_from_env = dj_database_url.config() #postgreSQL DB for HEROKU
+db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
-DATABASES['default']['CONN_MAX_AGE']= 500
+DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
