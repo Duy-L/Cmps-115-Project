@@ -5,6 +5,9 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from carts.models import Cart
 
+from django.db import models
+from products.models import Product
+
 
 def payment_process(request):
     host = request.get_host()
@@ -13,7 +16,12 @@ def payment_process(request):
     products = cart_obj.products.all()
     itemNames = ''
     for product in products:
-        itemNames += product.title + ', '
+        if (len(itemNames) != 0):
+            itemNames += ', '
+
+        itemNames += product.title
+
+    itemNames += '.'
 
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
@@ -32,6 +40,16 @@ def payment_process(request):
 
 @csrf_exempt
 def payment_done(request):
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
+    products = cart_obj.products.all()
+    for product in products:
+        print(product.id, product.active)
+        product_obj = Product.objects.get(id=product.id)
+        print(product_obj)
+        
+        #TODO: NEED TO ADD A WAY TO MARK PRODUCTS ACITVE TO FALSE
+        product_obj.active = False
+
     return render(request, 'payment/done.html')
 
 
