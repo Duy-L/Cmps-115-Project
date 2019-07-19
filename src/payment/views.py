@@ -30,8 +30,10 @@ def payment_process(request):
 
     form = PayPalPaymentsForm(initial=paypal_dict)
     context = {'form': form}
-    return render(request, 'payment/process.html', context)
-
+    if (cart_obj.products.count() > 0):
+        return render(request, 'payment/process.html', context)
+    else:
+        return render(request, 'carts/home.html')
 
 @csrf_exempt
 def payment_done(request):
