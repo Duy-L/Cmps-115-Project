@@ -196,7 +196,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def product_delete_view (request,  slug):
 	obj = get_object_or_404(Product, slug = slug)
 	obj.delete()
-	queryset = Product.objects.active()
+	queryset = Product.objects.all()
 	context = {
 		'object_list': queryset
 	}
