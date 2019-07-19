@@ -64,7 +64,9 @@ class ProductQuerySet(models.query.QuerySet):
 		lookups = (Q(title__icontains=query) | 
 				  Q(description__icontains=query) |
 				  Q(price__icontains=query) |
-				  Q(tag__title__icontains=query)
+				  Q(tag__title__icontains=query) |
+				  Q(brand__icontains=query) |
+				  Q(article__icontains=query)
 				  )
 		#Q(tag_name__icontains=query)
 		return self.filter(lookups).distinct()
@@ -74,7 +76,13 @@ class ProductManager(models.Manager):
 		return ProductQuerySet(self.model, using=self._db)
 
 	def all(self):
+	 	return self.get_queryset()
+
+	def active(self):
 		return self.get_queryset().active()
+
+	def inactive(self):
+		return self.get_queryset().filter(active=False)
 
 	def featured(self): #Product.objects.featured()
 		return self.get_queryset().featured()

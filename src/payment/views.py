@@ -4,6 +4,9 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from carts.models import Cart
+from django.db import models
+from products.models import Product
+from products.views import product_inactive_view
 
 
 def payment_process(request):
@@ -32,6 +35,16 @@ def payment_process(request):
 
 @csrf_exempt
 def payment_done(request):
+    cart_obj, new_obj = Cart.objects.new_or_get(request)
+    products = cart_obj.products.all()
+    for product in products:
+        print(product.id, product.active)
+        product_obj = Product.objects.get(id=product.id)
+        print(product_obj)
+        product_inactive_view(request, product.slug)
+        cart_obj.products.remove(product)
+        request.session['cart_items'] = cart_obj.products.count()
+
     return render(request, 'payment/done.html')
 
 

@@ -7,7 +7,7 @@ from .models import Cart
 
 def cart_home(request):
     cart_obj, new_obj = Cart.objects.new_or_get(request)
-    products = cart_obj.products.all()
+    products = cart_obj.products.active()
     total = 0
     for x in products:
         total += x.price
@@ -25,7 +25,7 @@ def cart_update_add(request):
             print("Show message to user, product is gone?")
             return redirect("cart:home")
         cart_obj, new_obj = Cart.objects.new_or_get(request)
-        if product_obj not in cart_obj.products.all():
+        if product_obj not in cart_obj.products.active():
             cart_obj.products.add(product_obj) # cart_obj.products.add(product_id)
         request.session['cart_items'] = cart_obj.products.count()
          
@@ -41,7 +41,7 @@ def cart_update_remove(request):
             print("Show message to user, product is gone?")
             return redirect("cart:home")
         cart_obj, new_obj = Cart.objects.new_or_get(request)
-        if product_obj in cart_obj.products.all():
+        if product_obj in cart_obj.products.active():
             cart_obj.products.remove(product_obj)
         request.session['cart_items'] = cart_obj.products.count()
          

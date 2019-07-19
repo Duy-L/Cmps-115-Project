@@ -10,11 +10,12 @@
 
 </style>
 
-<h3><center>{{user.username}}'s Items</center></h3>
+<h3><center>{{user.username}}'s Items for Sale</center></h3>
 
 	<div class='row'>
 
 {% for obj in object_list %}
+{% if obj.active == True %}
 	{% if obj.author == user %}
 	<div class="col">
 		{% include 'products/snippets/card.html' with instance=obj %}
@@ -29,7 +30,37 @@
 			</div>
 		{% endif %} 
 	{% endif %} 
-	{% endfor %}
+{% endif %}
+{% endfor %}
 	
 </div>
+
+<h3><center>{{user.username}}'s Items Sold</center></h3>
+
+	<div class='row'>
+
+{% for obj in object_list %}
+{% if obj.active != True %}
+
+	{% if obj.author == user %}
+	<div class="col">
+		{% include 'products/snippets/card.html' with instance=obj %}
+
+		{% if forloop.counter %}
+			</div>
+			<div class="grid"></div>
+			
+		
+		{% else %}
+		
+			</div>
+		{% endif %} 
+	{% endif %} 
+{% endif %}
+
+{% endfor %}
+
+	
+</div>
+
 {% endblock %}
