@@ -105,9 +105,11 @@ class Product(models.Model):
 	featured		= models.BooleanField(default=False)
 	active			= models.BooleanField(default=True)
 	timestamp		= models.DateTimeField(auto_now_add=True)
-	author 			= models.ForeignKey('auth.User', null=True, blank=True)
+	author 			= models.ForeignKey('auth.User', null=True, blank=True, related_name = 'seller')
 	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'other')
 	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'other')
+	buyer			= models.ForeignKey(User, null=True, blank=True, related_name = 'buyer')
+
 
 
 	objects = ProductManager()

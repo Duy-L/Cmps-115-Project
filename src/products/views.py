@@ -2,9 +2,13 @@ from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from carts.models import Cart
 from .models import Product, ProductForm
+
+User = get_user_model()
 
 from django.views.generic import (
     ListView,
@@ -154,7 +158,7 @@ class ProductDetailSlugView(DetailView):
 
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
-    fields = ['title', 'description', 'price', 'image', 'brand', 'article']
+    fields = ['title', 'brand', 'article', 'image', 'description', 'price']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -192,7 +196,7 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def product_delete_view (request,  slug):
 	obj = get_object_or_404(Product, slug = slug)
 	obj.delete()
-	queryset = Product.objects.active()
+	queryset = Product.objects.all()
 	context = {
 		'object_list': queryset
 	}
@@ -201,6 +205,7 @@ def product_delete_view (request,  slug):
 def product_inactive_view (request,  slug):
 	obj = get_object_or_404(Product, slug = slug)
 	obj.active = False
+	obj.buyer = request.user
 	obj.save()
 	return render(request, "products/user_list.html")
 
