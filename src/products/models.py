@@ -15,7 +15,7 @@ User = get_user_model()
 from .utils import unique_slug_generator
 
 BRANDS= [
-	('not seen', 'Not Seen'),
+	('other', 'Other'),
     ('nike', 'Nike'),
     ('adidas', 'Adidas'),
     ('converse', 'Converse'),
@@ -23,7 +23,7 @@ BRANDS= [
     ]
 
 ARTICLES= [
-	('not seen', 'Not Seen'),
+	('other', 'Other'),
 	('Outerwear', 'Outerwear'),
 	('tops', 'Tops'),
     ('bottoms', 'Bottoms'),
@@ -106,8 +106,9 @@ class Product(models.Model):
 	active			= models.BooleanField(default=True)
 	timestamp		= models.DateTimeField(auto_now_add=True)
 	author 			= models.ForeignKey('auth.User', null=True, blank=True)
-	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'not seen')
-	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'not seen')
+	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'other')
+	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'other')
+
 
 	objects = ProductManager()
 

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+
 <style>
 .col{
 	display: grid;
@@ -8,59 +10,99 @@
 	align-items: center;
 }
 
+.avatar {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
 </style>
 
-<h3><center>{{user.username}}'s Items for Sale</center></h3>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
 
-	<div class='row'>
-
-{% for obj in object_list %}
-{% if obj.active == True %}
-	{% if obj.author == user %}
-	<div class="col">
-		{% include 'products/snippets/card.html' with instance=obj %}
-
-		{% if forloop.counter %}
-			</div>
-			<div class="grid"></div>
-			
-		
-		{% else %}
-		
-			</div>
-		{% endif %} 
-	{% endif %} 
-{% endif %}
-{% endfor %}
-	
+<div class="w3-container">
+  <h2>Account Info: <i><font color="green">{{user.username}}</font></i></h2>
 </div>
 
-<h3><center>{{user.username}}'s Items Sold</center></h3>
-
-	<div class='row'>
-
-{% for obj in object_list %}
-{% if obj.active != True %}
-
-	{% if obj.author == user %}
-	<div class="col">
-		{% include 'products/snippets/card.html' with instance=obj %}
-
-		{% if forloop.counter %}
-			</div>
-			<div class="grid"></div>
-			
-		
-		{% else %}
-		
-			</div>
-		{% endif %} 
-	{% endif %} 
-{% endif %}
-
-{% endfor %}
-
-	
+<div class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="displayData('My Info')">My Info</button>
+  <button class="w3-bar-item w3-button" onclick="displayData('Purchase History')">Purchase History</button>
+  <button class="w3-bar-item w3-button" onclick="displayData('For Sale')">For Sale</button>
+  <button class="w3-bar-item w3-button" onclick="displayData('Items Sold')">Items Sold</button>
 </div>
+
+<div id="My Info" class="w3-container city">
+	<h2> Profile Pic: <img src='{% static "img/mscott.png" %}' alt="Avatar" class="avatar"> </h2>
+
+
+
+  	<h2> Maybe a bio? </h2>
+
+
+
+
+  	<h2>Shipping Info Goes here</h2>
+</div>
+
+<div id="Purchase History" class="w3-container city" style="display:none">
+  <h2>Purchase History goes here</h2>
+</div>
+
+<div id="For Sale" class="w3-container city" style="display:none">
+	{% for obj in object_list %}
+		{% if obj.active == True %}
+			{% if obj.author == user %}
+				{% include 'products/snippets/card.html' with instance=obj %}
+				{% if forloop.counter %}
+					<div class="grid"></div>
+				{% else %}
+				{% endif %}
+
+				{% if obj is empty %}
+					<h2>Nothing for sale</h2>
+				{% endif %}
+
+			{% else %}
+
+
+			{% endif %} 
+		{% endif %}
+	{% endfor %}
+</div>
+
+<div id="Items Sold" class="w3-container city" style="display:none">
+  {% for obj in object_list %}
+		{% if obj.active != True %}
+			{% if obj.author == user %}
+				
+					{% include 'products/snippets/card.html' with instance=obj %}
+
+						{% if forloop.counter %}
+							<div class="grid"></div>
+						{% else %}
+						{% endif %}
+
+			{% endif %} 
+		{% endif %}
+	{% endfor %}
+</div>
+
+
+
+<script>
+function displayData(cityName) {
+  var i;
+  var x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  document.getElementById(cityName).style.display = "block";  
+}
+</script>
+
+</body>
 
 {% endblock %}

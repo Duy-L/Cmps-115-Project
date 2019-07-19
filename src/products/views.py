@@ -109,7 +109,7 @@ def user_profile_list_view(request, author):
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    fields = ['title', 'description', 'price', 'image', 'brand', 'article']
+    fields = ['title', 'brand', 'article', 'image', 'description', 'price' ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
