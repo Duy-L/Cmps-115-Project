@@ -1,1 +1,1 @@
-web: gunicorn CMPS-115-Project.wsgi
+web: gunicorn ecommerce.wsgi
