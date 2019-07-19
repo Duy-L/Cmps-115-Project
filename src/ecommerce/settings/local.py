@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'tags',
     'paypal.standard.ipn',
     'payment',
-    'ecommerce',
+
 ]
 
 
