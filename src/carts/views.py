@@ -45,5 +45,20 @@ def cart_update_remove(request):
             cart_obj.products.remove(product_obj)
         request.session['cart_items'] = cart_obj.products.count()
          
-    
+        return redirect(request.META['HTTP_REFERER'])
+
+
+def cart_clear (request):
+    product_id = request.POST.get('product_id')
+    if product_id is not None:
+        try:
+            product_obj = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            print("Show message to user, product is gone?")
+            return redirect("cart:home")
+        cart_obj, new_obj = Cart.objects.new_or_get(request)
+        if product_obj in cart_obj.products.all():
+           cart_obj.clear()
+        request.session['cart_items'] = cart_obj.products.count()
+
         return redirect(request.META['HTTP_REFERER'])
