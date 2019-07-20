@@ -4,7 +4,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from carts.models import Cart
-from django.db import models
+#from django.db import models
 from products.models import Product
 from products.views import product_inactive_view
 
