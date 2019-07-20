@@ -1,3 +1,6 @@
+.env
+ecommerce/settings/local.py
+
 .DS_Store
 bin/
 include/

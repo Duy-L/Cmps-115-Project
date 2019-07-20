@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -26,7 +25,7 @@ SECRET_KEY = 'c+o%s63y#c1cq+feuw77e93nv4c(+&r369pnne$@n6p9^a5fed'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
 
     #third party
-    'storages',
+    'storages', 
     
     #our apps
     'allauth',
@@ -164,6 +163,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 #Django Paypal settings
 PAYPAL_RECEIVER_EMAIL = 'azeynalo@ucsc.edu'
 PAYPAL_TEST = True
+
 
 
 #from https://www.codingforentrepreneurs.com/blog/ssltls-settings-for-django/

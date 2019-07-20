@@ -1,13 +1,17 @@
 import datetime
+import os
 
 AWS_GROUP_NAME="cs115-ecommerce-group"
 AWS_USER_NAME="migimovt"
-AWS_ACCESS_KEY_ID="AKIA33PW6REIZD7LF7IR"
-AWS_SECRET_ACCESS_KEY="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"
+
+
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "AKIA33PW6REIZD7LF7IR")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "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")
+
 
 AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
-AWS_QUERYSTRING_AUTH = True
+AWS_QUERYSTRING_AUTH = False
 
 DEFAULT_FILE_STORAGE = 'ecommerce.aws.utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'ecommerce.aws.utils.StaticRootS3BotoStorage'
@@ -27,4 +31,7 @@ AWS_HEADERS = {
     'Expires': expires,
     'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
 }
-AWS_QUERYSTRING_AUTH = True
+
+PROTECTED_DIR_NAME = 'protected'
+PROTECTED_MEDIA_URL = '//%s.s3.amazonaws.com/%s/' %( AWS_STORAGE_BUCKET_NAME, PROTECTED_DIR_NAME)
+

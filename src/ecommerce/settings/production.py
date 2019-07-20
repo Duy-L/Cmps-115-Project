@@ -21,17 +21,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c+o%s63y#c1cq+feuw77e93nv4c(+&r369pnne$@n6p9^a5fed'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'c+o%s63y#c1cq+feuw77e93nv4c(+&r369pnne$@n6p9^a5fed')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com']
-
-
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [  
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -168,6 +167,9 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 #Django Paypal settings
 PAYPAL_RECEIVER_EMAIL = 'azeynalo@ucsc.edu'
 PAYPAL_TEST = True
+
+
+from ecommerce.aws.conf import *
 
 #encrypt ssl/tls https from https://www.codingforentrepreneurs.com/blog/ssltls-settings-for-django/
 CORS_REPLACE_HTTPS_REFERER      = True
