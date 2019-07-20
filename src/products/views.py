@@ -2,9 +2,13 @@ from django.http import Http404
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from carts.models import Cart
 from .models import Product, ProductForm
+
+User = get_user_model()
 
 from django.views.generic import (
     ListView,
@@ -20,10 +24,10 @@ class ProductFeaturedListView(ListView):
 
 	def get_queryset(self, *args, **kwargs):
 		request = self.request
-		return Product.objects.all().featured()
+		return Product.objects.active().featured()
 
 class ProductFeaturedDetailView(DetailView):
-	queryset = Product.objects.all().featured()
+	queryset = Product.objects.active().featured()
 	template_name = "products/featured-detail.html"
 
 	# def get_queryset(self, *args, **kwargs):
@@ -41,39 +45,39 @@ class ProductListView(ListView):
 
 	def get_queryset(self, *args, **kwargs):
 		request = self.request
-		return Product.objects.all()
+		return Product.objects.active()
 
 
 def product_list_view(request):
-	queryset = Product.objects.all()
+	queryset = Product.objects.active()
 	context = {
 		'object_list': queryset
 	}
 	return render(request, "products/list.html", context)
 
 def product_by_price_lowest(request):
-	queryset = Product.objects.all().order_by('price')
+	queryset = Product.objects.active().order_by('price')
 	context = {
 		'object_list':queryset
 	}
 	return render(request, "products/price.html", context)
 
 def product_by_price_highest(request):
-	queryset = Product.objects.all().order_by('-price')
+	queryset = Product.objects.active().order_by('-price')
 	context = {
 		'object_list':queryset
 	}
 	return render(request, "products/price.html", context)
 
 def product_by_date_oldest(request):
-	queryset = Product.objects.all().order_by('timestamp')
+	queryset = Product.objects.active().order_by('timestamp')
 	context = {
 		'object_list':queryset
 	}
 	return render(request, "products/price.html", context)
 
 def product_by_date_newest(request):
-	queryset = Product.objects.all().order_by('-timestamp')
+	queryset = Product.objects.active().order_by('-timestamp')
 	context = {
 		'object_list':queryset
 	}
@@ -100,7 +104,7 @@ def user_product_list_view(request):
 	return render(request, "products/user_list.html", context)
 
 def user_profile_list_view(request, author):
-	queryset = Product.objects.all()
+	queryset = Product.objects.active()
 	context = {
 		'object_list': queryset,
 		'author': author
@@ -109,7 +113,7 @@ def user_profile_list_view(request, author):
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    fields = ['title', 'description', 'price', 'image', 'brand', 'article']
+    fields = ['title', 'brand', 'article', 'image', 'description', 'price' ]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -128,7 +132,7 @@ def product_create_view(request):
 	return render(request, "products/product_form.html", context)
 
 class ProductDetailSlugView(DetailView):
-	queryset = Product.objects.all()
+	queryset = Product.objects.active()
 	template_name = "products/detail.html"
 
 	def get_context_data(self, *args, **kwargs):
@@ -142,11 +146,11 @@ class ProductDetailSlugView(DetailView):
 		slug = self.kwargs.get('slug')
 		#instance = get_object_or_404(Product, slug=slug, active=True)
 		try:
-			instance = Product.objects.get(slug=slug, active=True)
+			instance = Product.objects.get(slug=slug)
 		except Product.DoesNotExist:
 			raise Http404("Not found")
 		except Product.MultipleObjectsReturned:
-			qs = Product.objects.filter(slug=slug, active=True)
+			qs = Product.objects.filter(slug=slug)
 			instance = qs.first()
 		except:
 			raise Http404("Ummm")
@@ -154,7 +158,7 @@ class ProductDetailSlugView(DetailView):
 
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
-    fields = ['title', 'description', 'price', 'image', 'brand', 'article']
+    fields = ['title', 'brand', 'article', 'image', 'description', 'price']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -197,6 +201,13 @@ def product_delete_view (request,  slug):
 		'object_list': queryset
 	}
 	return render(request, "products/user_list.html", context)
+
+def product_inactive_view (request,  slug):
+	obj = get_object_or_404(Product, slug = slug)
+	obj.active = False
+	obj.buyer = request.user
+	obj.save()
+	return render(request, "products/user_list.html")
 
 class ProductDetailView(DetailView):
 	#queryset = Product.objects.all()

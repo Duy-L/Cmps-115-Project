@@ -15,7 +15,7 @@ User = get_user_model()
 from .utils import unique_slug_generator
 
 BRANDS= [
-	('not seen', 'Not Seen'),
+	('other', 'Other'),
     ('nike', 'Nike'),
     ('adidas', 'Adidas'),
     ('converse', 'Converse'),
@@ -23,11 +23,11 @@ BRANDS= [
     ]
 
 ARTICLES= [
-	('not seen', 'Not Seen'),
+	('other', 'Other'),
 	('Outerwear', 'Outerwear'),
 	('tops', 'Tops'),
     ('bottoms', 'Bottoms'),
-    ('shoes', 'Shoes'),
+    ('footwear', 'Footwear'),
     ('accesories', 'Accesories'),
     ]
 
@@ -66,7 +66,7 @@ class ProductQuerySet(models.query.QuerySet):
 				  Q(price__icontains=query) |
 				  Q(tag__title__icontains=query) |
 			   	  Q(brand__icontains=query) |
-			   	  Q(article_icontains=query)
+			   	  Q(article__icontains=query)
 				  )
 		#Q(tag_name__icontains=query)
 		return self.filter(lookups).distinct()
@@ -76,7 +76,13 @@ class ProductManager(models.Manager):
 		return ProductQuerySet(self.model, using=self._db)
 
 	def all(self):
+	 	return self.get_queryset()
+
+	def active(self):
 		return self.get_queryset().active()
+
+	def inactive(self):
+		return self.get_queryset().filter(active=False)
 
 	def featured(self): #Product.objects.featured()
 		return self.get_queryset().featured()
@@ -95,13 +101,16 @@ class Product(models.Model):
 	slug			= models.SlugField(blank=True, unique=True)
 	description		= models.TextField()
 	price 			= models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
-	image			= models.ImageField(upload_to=upload_image_path, default='default.png')
+	image			= models.ImageField(upload_to=upload_image_path, blank = False, null = False)
 	featured		= models.BooleanField(default=False)
 	active			= models.BooleanField(default=True)
 	timestamp		= models.DateTimeField(auto_now_add=True)
-	author 			= models.ForeignKey('auth.User', null=True, blank=True)
-	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'not seen')
-	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'not seen')
+	author 			= models.ForeignKey('auth.User', null=True, blank=True, related_name = 'seller')
+	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'other')
+	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'other')
+	buyer			= models.ForeignKey(User, null=True, blank=True, related_name = 'buyer')
+
+
 
 	objects = ProductManager()
 

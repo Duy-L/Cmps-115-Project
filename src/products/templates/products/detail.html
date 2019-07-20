@@ -35,16 +35,26 @@
 			<br>
 			<br>
 
+			{% if user.is_authenticated %}
+				{% if object.author == user %}
+					{% if object.active == True %}
+					<div>
+						<button type="button" class="btn btn-warning"><a style="text-decoration:none" href="{% url 'products:product-edit' slug=object.slug %}"><div class ="button">Edit Listing</div></a></button>
 
-			{% if object.author == user %}
-			<div>
-				<button type="button" class="btn btn-warning"><a style="text-decoration:none" href="{% url 'products:product-edit' slug=object.slug %}"><div class ="button">Edit Listing</div></a></button>
+						<button type="button" class="btn btn-danger"><a style="text-decoration:none" href="{% url 'products:product-delete' slug=object.slug %}"><div class ="button">Delete</div></a></button>
+					</div>
+					{% else %}
+						<i><font color="red">(ITEM HAS SOLD TO {{object.buyer}} ) </font></i>
+						<br>
+					{% endif %}
+				{% else %}
+				{% include 'products/snippets/update-cart2.html' with product=object cart=cart %}
 
-				<button type="button" class="btn btn-danger"><a style="text-decoration:none" href="{% url 'products:product-delete' slug=object.slug %}"><div class ="button">Delete</div></a></button>
-			</div>
+				{% endif %}
 			{% else %}
-			{% include 'products/snippets/update-cart2.html' with product=object cart=cart %}
-
+			<div>
+				<button type="button" class="btn btn-warning"><a style="text-decoration:none" href="{% url 'login' %}"><div class ="button">Login to Purchase</div></a></button>
+			</div>
 			{% endif %}
 			<br>
 			{{ object.description|linebreaks }}
