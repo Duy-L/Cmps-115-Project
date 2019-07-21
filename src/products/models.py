@@ -109,6 +109,7 @@ class Product(models.Model):
 	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'other')
 	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'other')
 	buyer			= models.ForeignKey(User, null=True, blank=True, related_name = 'buyer')
+	shipping		= models.TextField(null=True, blank=True, default = ' ')
 
 
 
