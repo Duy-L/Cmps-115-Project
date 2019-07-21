@@ -35,7 +35,10 @@ def checkout_info(request):
                 product.shipping = shipping
                 product.save()
 
-            return HttpResponseRedirect(reverse('payment:process'), {'info': form})
+            if (cart_obj.products.count() > 0):
+                return HttpResponseRedirect(reverse('payment:process'), {'info': form})
+            else:
+                return render(request, 'carts/home.html')
 
     else:
         form = CheckoutForm()
