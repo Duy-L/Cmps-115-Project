@@ -1,5 +1,6 @@
 amqp==2.5.0
 aniso8601==6.0.0
+asn1crypto==0.24.0
 autopep8==1.4.4
 Babel==2.7.0
 beautifulsoup4==4.7.1
@@ -19,6 +20,7 @@ cffi==1.12.3
 chardet==3.0.4
 Click==7.0
 codegen==1.0
+cryptography==2.7
 cssselect2==0.2.1
 defusedxml==0.6.0
 dj-database-url==0.5.0
@@ -79,6 +81,7 @@ graphene-django==2.3.2
 graphene-django-optimizer==0.4.2
 graphql-core==2.2
 graphql-relay==0.4.5
+gunicorn==19.9.0
 html5lib==1.0.1
 idna==2.8
 ipaddress==1.0.22

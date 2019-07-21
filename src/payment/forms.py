@@ -1,7 +1,7 @@
 from django import forms
 from django.shortcuts import get_object_or_404, render
 from carts.models import Cart
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 

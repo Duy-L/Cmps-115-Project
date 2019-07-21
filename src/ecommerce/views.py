@@ -12,7 +12,7 @@ def home_page(request):
 	context = {
 		"content": "Shop by Category",
 	}
-	if request.user.is_authenticated():
+	if request.user.is_authenticated:
 		context["premium_content"] = "YEAHHHHH"
 	return render(request, "home_page.html", context)
 
