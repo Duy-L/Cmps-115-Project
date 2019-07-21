@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
+
 <style>
 .col{
 	display: grid;
@@ -8,28 +10,235 @@
 	align-items: center;
 }
 
+.avatar {
+  vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.checkout{
+  background-color:none;
+  color: white;
+}
+.checkout:hover{
+
+  text-decoration: none;
+}
+.title{
+  background-color:none;
+  color: black;
+  font-size:17px;
+  padding: 15px;
+}
+.title:hover{
+
+  text-decoration: none;
+}
+.h3{
+  text-align: center;
+}
+
 </style>
 
-<h3><center>{{user.username}}'s Items</center></h3>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
 
-	<div class='row'>
-
-{% for obj in object_list %}
-	{% if obj.author == user %}
-	<div class="col">
-		{% include 'products/snippets/card.html' with instance=obj %}
-
-		{% if forloop.counter %}
-			</div>
-			<div class="grid"></div>
-			
-		
-		{% else %}
-		
-			</div>
-		{% endif %} 
-	{% endif %} 
-	{% endfor %}
-	
+<div class="w3-container">
+  <h2>Account Info: <i><font color="green">{{user.username}}</font></i></h2>
 </div>
+
+<div class="w3-bar w3-black">
+  <button class="w3-bar-item w3-button" onclick="displayData('My Info')">My Info</button>
+  <button class="w3-bar-item w3-button" onclick="displayData('Purchase History')">Purchase History</button>
+  <button class="w3-bar-item w3-button" onclick="displayData('For Sale')">For Sale</button>
+  <button class="w3-bar-item w3-button" onclick="displayData('Items Sold')">Items Sold</button>
+</div>
+
+<div id="My Info" class="w3-container city">
+	<h2> Profile Pic: <img src='{% static "img/mscott.png" %}' alt="Avatar" class="avatar"> </h2>
+
+
+
+  	<h2> Maybe a bio? </h2>
+
+
+
+
+  	<h2>Shipping Info Goes here</h2>
+</div>
+
+<div id="Purchase History" class="w3-container city" style="display:none">
+<h4><center>Items You Have Purchased</center></h4>
+
+{% if object_list.exists %}
+<div class="container">
+	<table id="for_sale" class="table table-hover table-condensed">
+    				<thead>
+						<tr>
+							<th style="width:50%">Product</th>
+							<th style="width:15%">Price</th>
+							<th style="width:25%">Purchased From</th>
+							<th style="width:10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+
+              {% for product in object_list.all %}
+              	{% if product.active == False %}
+              		{% if product.buyer == user %}
+						<tr>
+							<td data-th="Product">
+								<div class="row">
+               
+									<div class="col-sm-2 hidden-xs"><a href ='{{ product.get_absolute_url }}'><img src="{{ product.image.url }}" width="150%" height="" alt="..." class="img-responsive"/></a></div>
+               
+                  <div class="col-sm-10">
+										<h4 class="nomargin">
+                      <a style="text-decoration: none" href='{{ product.get_absolute_url }}'> <div class ="title">{{ product.title }}</div></a>
+                    </h4>
+									</div>
+								</div>
+							</td>
+							<td data-th="Price">${{ product.price }}</td>
+							<td data-th="Purchased from">
+                <div> <strong><i><font color="red"><a href="{% url 'products:user-products' author=product.author %}"> {{ product.author }}</a></font></i></strong></div>
+              </td>
+              {% endif %}
+              {% endif %}
+              
+              {% endfor %}
+						</tr>
+          </tbody>
+           
+				</table>
+</div>
+
+{% endif %}
+</div>
+
+<div id="For Sale" class="w3-container city" style="display:none">
+
+
+
+
+
+<h4><center>Your Items for Sale</center></h4>
+
+{% if object_list.exists %}
+<div class="container">
+	<table id="for_sale" class="table table-hover table-condensed">
+    				<thead>
+						<tr>
+							<th style="width:60%">Product</th>
+							<th style="width:15%">Price</th>
+							<th style="width:10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+
+              {% for product in object_list.all %}
+              	{% if product.active == True %}
+              		{% if product.author == user %}
+						<tr>
+							<td data-th="Product">
+								<div class="row">
+               
+									<div class="col-sm-2 hidden-xs"><a href ='{{ product.get_absolute_url }}'><img src="{{ product.image.url }}" width="150%" height="" alt="..." class="img-responsive"/></a></div>
+               
+                  <div class="col-sm-10">
+										<h4 class="nomargin">
+                      <a style="text-decoration: none" href='{{ product.get_absolute_url }}'> <div class ="title">{{ product.title }}</div></a>
+                    </h4>
+									</div>
+								</div>
+							</td>
+							<td data-th="Price">${{ product.price }}</td>
+              {% endif %}
+              {% endif %}
+              
+              {% endfor %}
+						</tr>
+          </tbody>
+           
+				</table>
+</div>
+
+{% endif %}
+</div>
+
+
+
+
+
+
+
+
+
+<div id="Items Sold" class="w3-container city" style="display:none">
+
+<h4><center>Your Sold Items</center></h4>
+
+{% if object_list.exists %}
+<div class="container">
+	<table id="sold" class="table table-hover table-condensed">
+    				<thead>
+						<tr>
+							<th style="width:50%">Product</th>
+							<th style="width:15%">Price</th>
+							<th style="width:25%">Purchased By</th>
+							<th style="width:10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+						
+              {% for product in object_list.all %}
+              	{% if product.active == False %}
+              		{% if product.author == user %}
+						<tr>
+							<td data-th="Product">
+								<div class="row">
+               
+									<div class="col-sm-2 hidden-xs"><a href ='{{ product.get_absolute_url }}'><img src="{{ product.image.url }}" width="150%" height="" alt="..." class="img-responsive"/></a></div>
+               
+                  <div class="col-sm-10">
+										<h4 class="nomargin">
+                      <a style="text-decoration: none" href='{{ product.get_absolute_url }}'> <div class ="title">{{ product.title }}</div></a>
+                    </h4>
+									</div>
+								</div>
+							</td>
+							
+			              <td data-th="Price">${{ product.price }}</td>
+										<td data-th="Purchased By">
+			                <div> <strong><i><font color="red"><a href="{% url 'products:user-products' author=product.buyer %}"> {{ product.buyer }}</a></font></i></strong></div>
+			              </td>
+              {% endif %}
+              {% endif %}
+              
+              {% endfor %}
+						</tr>
+          </tbody>
+           
+				</table>
+</div>
+{% endif %}
+</div>
+
+
+
+<script>
+function displayData(cityName) {
+  var i;
+  var x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  document.getElementById(cityName).style.display = "block";  
+}
+</script>
+
+</body>
+
 {% endblock %}
