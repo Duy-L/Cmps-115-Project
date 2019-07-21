@@ -185,9 +185,10 @@
 	<table id="sold" class="table table-hover table-condensed">
     				<thead>
 						<tr>
-							<th style="width:50%">Product</th>
-							<th style="width:15%">Price</th>
-							<th style="width:25%">Purchased By</th>
+							<th style="width:30%">Product</th>
+							<th style="width:10%">Price</th>
+							<th style="width:20%">Purchased By</th>
+							<th style="width:30%">Ship To</th>
 							<th style="width:10%"></th>
 						</tr>
 					</thead>
@@ -214,6 +215,7 @@
 										<td data-th="Purchased By">
 			                <div> <strong><i><font color="red"><a href="{% url 'products:user-products' author=product.buyer %}"> {{ product.buyer }}</a></font></i></strong></div>
 			              </td>
+						  <td data-th="Ship To">{{ product.shipping|linebreaks }}</td>
               {% endif %}
               {% endif %}
               

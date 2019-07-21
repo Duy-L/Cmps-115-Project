@@ -93,7 +93,7 @@ class UserProductListView(ListView):
 
 	def get_queryset(self, *args, **kwargs):
 		request = self.request
-		return Product.objects.all()
+		return Product.objects.all().order_by('-timestamp')
 
 
 def user_product_list_view(request):

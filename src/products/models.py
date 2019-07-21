@@ -108,7 +108,9 @@ class Product(models.Model):
 	author 			= models.ForeignKey('auth.User', null=True, blank=True, related_name = 'seller', on_delete=models.DO_NOTHING)
 	brand			= models.CharField(max_length = 100, choices=BRANDS, default = 'other')
 	article			= models.CharField(max_length = 100, choices=ARTICLES, default = 'other')
-	buyer			= models.ForeignKey(User, null=True, blank=True, related_name = 'buyer', on_delete=models.DO_NOTHING)
+	buyer			= models.ForeignKey(User, null=True, blank=True, related_name = 'buyer',on_delete=models.DO_NOTHING)
+	shipping		= models.TextField(null=True, blank=True, default = ' ')
+
 
 
 	objects = ProductManager()
