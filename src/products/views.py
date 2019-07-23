@@ -47,7 +47,6 @@ class ProductListView(ListView):
 		request = self.request
 		return Product.objects.active()
 
-
 def product_list_view(request):
 	queryset = Product.objects.active()
 	context = {
@@ -55,6 +54,7 @@ def product_list_view(request):
 	}
 	return render(request, "products/list.html", context)
 
+#SORT FILTER (lowest price)
 def product_by_price_lowest(request):
 	queryset = Product.objects.active().order_by('price')
 	context = {
@@ -62,6 +62,7 @@ def product_by_price_lowest(request):
 	}
 	return render(request, "products/price.html", context)
 
+#SORT FILTER (highest price)
 def product_by_price_highest(request):
 	queryset = Product.objects.active().order_by('-price')
 	context = {
@@ -69,6 +70,7 @@ def product_by_price_highest(request):
 	}
 	return render(request, "products/price.html", context)
 
+#SORT FILTER (oldest date created)
 def product_by_date_oldest(request):
 	queryset = Product.objects.active().order_by('timestamp')
 	context = {
@@ -76,6 +78,7 @@ def product_by_date_oldest(request):
 	}
 	return render(request, "products/price.html", context)
 
+#SORT FILTER (latest date created)
 def product_by_date_newest(request):
 	queryset = Product.objects.active().order_by('-timestamp')
 	context = {
@@ -158,6 +161,7 @@ class ProductDetailSlugView(DetailView):
 		except:
 			raise Http404("Ummm")
 		return instance
+
 #Edit a Product
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
@@ -186,6 +190,7 @@ def product_update_view(request, slug):
 	}
 	return render(request, "products/product_form.html", context)
 
+
 class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Product
     success_url = '/'
@@ -195,7 +200,8 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
-
+		
+#delete product
 def product_delete_view (request,  slug):
 	obj = get_object_or_404(Product, slug = slug)
 	obj.delete()

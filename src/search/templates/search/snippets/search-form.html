@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+
+<!-- CSS CONTENT -->
 <style>
 .testing{
 	position: relative;
@@ -57,17 +59,13 @@
 }
 </style>
 		
-
+<!-- this is the search bar, added the animation when hovering over it  -->
 <form method='GET' action='{% url "search:query" %}' class="form my-2 my-lg-0">
 	<div class ="testing">
 	<div class ='input-group'>
-	
 	  	<input class="form-control" type="text" ID="first" placeholder="Search Designers & More" name='q' aria-label="Search" value='{{ request.GET.q }}' >
-	
 		  <span class='input-group-btn'></span>
-		  
 	  		<button class="btn btn-light" type="search" ID="second" ><i class="fa fa-search"></i> </button>
-		  
 		</span>
 	</div>
 	</div>

@@ -6,7 +6,7 @@ import string
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-
+#create a unique product URL based on their title name
 def unique_slug_generator(instance, new_slug=None):
     """
     This is for a Django project and it assumes your instance 
@@ -16,7 +16,6 @@ def unique_slug_generator(instance, new_slug=None):
         slug = new_slug
     else:
         slug = slugify(instance.title)
-
     Klass = instance.__class__
     qs_exists = Klass.objects.filter(slug=slug).exists()
     if qs_exists:
