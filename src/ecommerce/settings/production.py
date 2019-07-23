@@ -9,16 +9,12 @@ https://docs.djangoproject.com/en/1.11/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
-
+#this production file is for hosting on heroku
 import os
+from ecommerce.aws.conf import *
 
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'c+o%s63y#c1cq+feuw77e93nv4c(+&r369pnne$@n6p9^a5fed')
@@ -28,8 +24,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-# Application definition
 
+# Application definition
 INSTALLED_APPS = [  
     'django.contrib.admin',
     'django.contrib.auth',
@@ -89,8 +85,6 @@ WSGI_APPLICATION = 'ecommerce.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -104,8 +98,6 @@ DATABASES['default'].update(db_from_env)
 DATABASES['default']['CONN_MAX_AGE'] = 500
 
 # Password validation
-# https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -123,8 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/1.11/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -137,7 +127,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
 
@@ -156,7 +145,7 @@ AUTHENTICATION_BACKENDS = (
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-SITE_ID = 2
+SITE_ID = 2 #this is for gmail api
 
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_USERNAME_REQUIRED = False
@@ -166,8 +155,6 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 PAYPAL_RECEIVER_EMAIL = 'azeynalo@ucsc.edu'
 PAYPAL_TEST = True
 
-
-from ecommerce.aws.conf import *
 
 #encrypt ssl/tls https from https://www.codingforentrepreneurs.com/blog/ssltls-settings-for-django/
 CORS_REPLACE_HTTPS_REFERER      = True

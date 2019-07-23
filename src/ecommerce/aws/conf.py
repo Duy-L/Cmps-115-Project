@@ -1,10 +1,10 @@
 import datetime
 import os
 
+#configuration for the AWS S3 cloud storage
+
 AWS_GROUP_NAME="cs115-ecommerce-group"
 AWS_USER_NAME="migimovt"
-
-
 AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID", "AKIA33PW6REIZD7LF7IR")
 AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY", "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")
 

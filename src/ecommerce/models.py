@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
-
+#definition for Post class / Sell form on the website
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()

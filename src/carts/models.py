@@ -1,12 +1,11 @@
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import pre_save, post_save, m2m_changed
-
 from products.models import Product
 
 User = settings.AUTH_USER_MODEL
-# Create your models here.
 
+#CartManager handles the user's shopping cart and save it in a queryset
 class CartManager(models.Manager):
     def new_or_get(self, request):
         cart_id = request.session.get("cart_id", None)
@@ -30,6 +29,8 @@ class CartManager(models.Manager):
                 user_obj = user
         return self.model.objects.create(user=user_obj)
 
+
+#Define Cart class
 class Cart(models.Model):
     user= models.ForeignKey(User, null=True, blank=True, on_delete=models.DO_NOTHING)
     products=models.ManyToManyField(Product, blank=True)
@@ -43,7 +44,7 @@ class Cart(models.Model):
     def __str__(self):
         return str(self.id)
 
-
+#this is the total and subtotal price calculation
 def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         products = instance.products.all()
@@ -57,7 +58,7 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
 
 m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 
-
+#if subtotal > 0 then total = subtotal, else total = 0
 def pre_save_cart_receiver(sender, instance, *arg, **kwargs):
     if instance.subtotal > 0:
         instance.total = instance.subtotal

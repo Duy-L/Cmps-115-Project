@@ -23,12 +23,6 @@
       {% include 'search/snippets/search-form.html' %}
     </ul>
     <ul class="navbar-nav ml-auto">
-      <!-- <li class="nav-item {% if request.path == home_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
-      </li> -->
-     <!--  <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-      </li> -->
       <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
         <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
       </li>

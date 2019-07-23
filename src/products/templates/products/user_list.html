@@ -39,19 +39,22 @@
   text-align: center;
 }
 .header{
-	display: block;
+  display: block;
   color: #000;
   padding: 8px 16px;
   text-decoration: none;
   list-style-type: none;
   margin:0;
-  padding: 10px;
+  padding: 2%;
   position:absolute;
-  left: 8%;
+  left: 7%;
   right: 0;
 }
 .second_nav{
 	text-align: left;
+}
+.container{
+	padding-left: 80px;
 }
 </style>
 
@@ -63,6 +66,7 @@
 </div>
 
 <br>		  
+
 <div class="second_nav">
 	<div class ="header">
 		<li><button class="w3-bar-item w3-button" onclick="displayData('For Sale')">My Items</button></li>
@@ -100,7 +104,7 @@
                
                   <div class="col-sm-10">
 										<h4 class="nomargin">
-                      <a style="text-decoration: none" href='{{ product.get_absolute_url }}'> <div class ="title">{{ product.title }}</div></a>
+                      <a style="text-decoration: none" href='{{ product.get_absolute_url }}'> <div class ="title">&ensp;&ensp;{{ product.title }}</div></a>
                     </h4>
 									</div>
 								</div>

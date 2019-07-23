@@ -4,8 +4,7 @@ from .views import (
     cart_home,
     cart_update_remove,
     cart_update_add,
-    cart_clear
-
+    cart_clear,
     )
 
 
