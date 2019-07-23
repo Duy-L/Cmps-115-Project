@@ -34,7 +34,7 @@ class ProductFeaturedDetailView(DetailView):
 	# 	request = self.request
 	# 	return Product.objects.featured()
 
-
+#display ENTIRE SHOP
 class ProductListView(ListView):
 	template_name = "products/list.html"
 
@@ -83,6 +83,7 @@ def product_by_date_newest(request):
 	}
 	return render(request, "products/price.html", context)
 
+#display CURRENT USER's products
 class UserProductListView(ListView):
 	template_name = "products/user_list.html"
 
@@ -103,6 +104,7 @@ def user_product_list_view(request):
 	}
 	return render(request, "products/user_list.html", context)
 
+#display ANOTHER USER'S products
 def user_profile_list_view(request, author):
 	queryset = Product.objects.active()
 	context = {
@@ -111,6 +113,7 @@ def user_profile_list_view(request, author):
 	}
 	return render(request, "products/user_profile.html", context)
 
+#Create new Product
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     fields = ['title', 'brand', 'article', 'image', 'description', 'price' ]
@@ -155,7 +158,7 @@ class ProductDetailSlugView(DetailView):
 		except:
 			raise Http404("Ummm")
 		return instance
-
+#Edit a Product
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Product
     fields = ['title', 'brand', 'article', 'image', 'description', 'price']
@@ -201,7 +204,7 @@ def product_delete_view (request,  slug):
 		'object_list': queryset
 	}
 	return render(request, "products/user_list.html", context)
-
+#Marks a product as "inactive" aka SOLD
 def product_inactive_view (request,  slug):
 	obj = get_object_or_404(Product, slug = slug)
 	obj.active = False
@@ -209,6 +212,7 @@ def product_inactive_view (request,  slug):
 	obj.save()
 	return render(request, "products/user_list.html")
 
+#display DETAILS of ONE PRODUCT
 class ProductDetailView(DetailView):
 	#queryset = Product.objects.all()
 	template_name = "products/detail.html"
