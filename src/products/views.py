@@ -30,18 +30,9 @@ class ProductFeaturedDetailView(DetailView):
 	queryset = Product.objects.active().featured()
 	template_name = "products/featured-detail.html"
 
-	# def get_queryset(self, *args, **kwargs):
-	# 	request = self.request
-	# 	return Product.objects.featured()
-
 #display ENTIRE SHOP
 class ProductListView(ListView):
 	template_name = "products/list.html"
-
-	# def get_context_data(self, *args, **kwargs):
-	# 	context = super(ProductListView, self).get_context_data(*args, **kwargs)
-	# 	print(context)
-	# 	return context
 
 	def get_queryset(self, *args, **kwargs):
 		request = self.request
@@ -90,11 +81,6 @@ def product_by_date_newest(request):
 class UserProductListView(ListView):
 	template_name = "products/user_list.html"
 
-	# def get_context_data(self, *args, **kwargs):
-	# 	context = super(ProductListView, self).get_context_data(*args, **kwargs)
-	# 	print(context)
-	# 	return context
-
 	def get_queryset(self, *args, **kwargs):
 		request = self.request
 		return Product.objects.all().order_by('-timestamp')
@@ -125,17 +111,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-def product_create_view(request):
-	product_form = ProductForm(request.POST, request.FILES)
-	context = {
-		"title":"Contact Page",
-		"content":"Welcome to the new product page.",
-		"form": product_form,
-	}
-	if product_form.is_valid():
-			print(product_form.cleaned_data)
-			#product_form.author = request.user
-	return render(request, "products/product_form.html", context)
 
 class ProductDetailSlugView(DetailView):
 	queryset = Product.objects.active()
@@ -236,26 +211,12 @@ class ProductDetailView(DetailView):
 			raise Http404("Product does not exist.")
 		return instance
 
-	# def get_queryset(self, *args, **kwargs):
-	# 	request = self.request
-	# 	pk = self.kwargs.get('pk')
-	# 	return Product.objects.filter(pk=pk)
-
 
 def product_detail_view(request, pk=None, *args, **kwargs):
 
 	instance = Product.objects.get_by_id(pk)
 	if instance is None:
 		raise Http404("Product does not exist")
-
-	# print(instance)
-	# qs = Product.objects.filter(id=pk)
-
-	# #print(qs)
-	# if qs.exists() and qs.count() == 1: #len(qs)
-	# 	instance = qs.first()
-	# else:
-	# 	raise Http404("Product does not exist")
 
 	context = {
 		'object': instance

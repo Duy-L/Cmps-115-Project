@@ -9,65 +9,57 @@
 {% url 'products:product-create' as create_url %}
 
 
-  <nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-light mb-12" style="background-color: #FFFFFF;">
-  <!-- <div class='container'> -->
-  <a class="navbar-brand" href="{% url 'home' %}"> 
-    <img src="{% static 'img/wabisabi.png' %}" width="110" height="60" class="d-inline-block align-top" alt="">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      {% include 'search/snippets/search-form.html' %}
-    </ul>
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
-      </li>
-      {% if request.user.is_authenticated %}
-      <li class="nav-item {% if request.path == create_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'products:product-create' %}">Sell</a>
-      </li>
-          {% else %}
-      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
-          <a class="nav-link" href="{% url 'login' %}">Sell</a>
-      </li>
+<nav class="navbar sticky-top navbar-expand-lg navbar-light navbar-light mb-12" style="background-color: #FFFFFF;">
+<!-- <div class='container'> -->
+<a class="navbar-brand" href="{% url 'home' %}"> 
+  <img src="{% static 'img/wabisabi.png' %}" width="110" height="60" class="d-inline-block align-top" alt="">
+</a>
 
-          {% endif %}
-      <li class="nav-item {% if request.path == featured_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'featured' %}">Staff Picks</i></a>
-        
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+
+<!-- This is our main nav bar on the right -->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <ul class="navbar-nav mr-auto">
+    {% include 'search/snippets/search-form.html' %}
+  </ul>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item {% if request.path == products_list_url %}active{% endif %}">
+      <a class="nav-link" href="{% url 'products:list' %}">Shop</a>
+    </li>
+    {% if request.user.is_authenticated %}
+    <li class="nav-item {% if request.path == create_url %}active{% endif %}">
+      <a class="nav-link" href="{% url 'products:product-create' %}">Sell</a>
+    </li>
+        {% else %}
+    <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+        <a class="nav-link" href="{% url 'login' %}">Sell</a>
+    </li>
+        {% endif %}
+    <li class="nav-item {% if request.path == featured_url %}active{% endif %}">
+      <a class="nav-link" href="{% url 'featured' %}">Staff Picks</i></a>
+    </li>
+    {% if request.user.is_authenticated %}
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{user.username}}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <!-- <a class="dropdown-item" href="#">Account Profile</a>
+            <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" href="{% url 'products:user_list' %}"> My Account</a>
+            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          </div>
       </li>
-      
-      {% if request.user.is_authenticated %}
-      
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{user.username}}
-            </a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <!-- <a class="dropdown-item" href="#">Account Profile</a>
-              <div class="dropdown-divider"></div> -->
-              <a class="dropdown-item" href="{% url 'products:user_list' %}"> My Account</a>
-              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-            </div>
-        </li>
-      {% else %}
-        <li class="nav-item {% if request.path == login_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'login' %}">Login/SignUp</a>
-        </li>
-      <!-- <li class="nav-item {% if request.path == register_url %}active{% endif %}">
-        <a class="nav-link" href="{% url 'register' %}">Register</a>
-      </li> -->
-      {% endif %}
-      
-      
-      <li class="nav-item {% if request.path == cart_url %}active{% endif %}">
-          <a class="nav-link" href="{{ cart_url }}"> <i class="fas fa-shopping-cart"></i>({{ request.session.cart_items }})</a>
+    {% else %}
+      <li class="nav-item {% if request.path == login_url %}active{% endif %}">
+           <a class="nav-link" href="{% url 'login' %}">Login/SignUp</a>
       </li>
-    </ul>
-  </div>
-  <!-- </div> -->
+    {% endif %}
+    <li class="nav-item {% if request.path == cart_url %}active{% endif %}">
+        <a class="nav-link" href="{{ cart_url }}"> <i class="fas fa-shopping-cart"></i>({{ request.session.cart_items }})</a>
+    </li>
+  </ul>
+</div>
 </nav>

@@ -3,12 +3,12 @@
 {% load socialaccount %}
 {% block content %}
 
+<!-- CSS CONTENT -->
 <style>
 	.box1{
 		height: 84%;
 		width: 64%;
 		background-image: url('{% static 'img/banner10.jpg' %}');
-
 		background-size: contain;
 		background-position: center;
 		background-repeat: no-repeat;
@@ -28,19 +28,18 @@
 	}
 </style>
 
-
+<!-- Register form -->
 <div class="box1">
 	<p style=" display: table-cell; padding: 18em; position: center;">
-			<div class ="form">
-					<h2>Sign up</h2>
-					<form method='POST'> 
-						{% csrf_token %}
-						{{ form.as_p }}
-						<button type='submit' class='btn btn-danger'>Sign up</button>
-						
-					</form>
-				</div>
+		<div class ="form">
+				<h2>Sign up</h2>
+				<form method='POST'> 
+					{% csrf_token %}
+					{{ form.as_p }}
+					<button type='submit' class='btn btn-danger'>Sign up</button>	
+				</form>
+		</div>
 	</p>
-	</div>
+</div>
 
 {% endblock %}

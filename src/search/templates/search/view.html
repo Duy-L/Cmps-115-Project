@@ -7,8 +7,14 @@
 	list-style:none;
 	padding: 6px;
 }
+.col{
+	display: grid;
+	justify-content: center;
+	align-items: center;
+}
 </style>
 
+<!-- this portions add the filters to the search page -->
 <div class = "category_bar">
 	<nav class="navbar navbar-expand-lg navbar-light navbar-light mb-12" style="background-color: #FFFFFF;">
 		<li class="nav-item dropdown">
@@ -32,12 +38,10 @@
 	</nav>
 </div>
 
-
 <!-- display the result of search -->
 <div class='row mb-3'>
 	{% if query %}
 		<div class='col-12'></div>
-		
 	{% else %}
 		<div class='col-12 col-md-6 mx-auto py-5'>
 			{% include 'search/snippets/search-form.html' %}
@@ -50,30 +54,16 @@
 	{% endif %}
 </div>
 
-<style>
-.col{
-	display: grid;
-	justify-content: center;
-	align-items: center;
-}
-</style>
-
 <div class='row'>
 	{% for obj in object_list %}
 		<div class="col">
 			{% include 'products/snippets/card.html' with instance=obj %}
-	
 			{% if forloop.counter %}
 				</div>
 				<div class="grid"></div>
-				
-			
 			{% else %}
-			
 				</div>
 			{% endif %} 
-	
 		{% endfor %}
-		
 	</div>
 {% endblock %}

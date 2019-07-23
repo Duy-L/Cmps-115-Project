@@ -2,6 +2,8 @@
 {% load static %}
 {% load socialaccount %}
 {% block content %}
+
+<!-- CSS CONTENT -->
 <style>
 .box1{
 	height: 85vh;
@@ -17,23 +19,22 @@
     left: 0;
     right: 0;
 }
-
 </style>
 
-	<div class="box1">
-		<p style=" display: table-cell; padding: 15em; position: center">
-				
-				<h2>Login</h2>
-			
-				<form method='POST'>{% csrf_token %}
-					{{ form.as_p }}
-					<button type='submit' class='btn btn-info '>Login</button>
-					<a href="{% url 'register' %}" class ="btn btn-danger">Sign Up</a>
-				<br> <br>
-					<a href="{% provider_login_url 'google' %}" class ="btn btn-warning">Log In with Gmail</a>
-				</form>
+<!-- This is a login form -->
+<div class="box1">
+	<p style=" display: table-cell; padding: 15em; position: center">
+			<h2>Login</h2>
+			<form method='POST'>{% csrf_token %}
+				{{ form.as_p }}
+				<button type='submit' class='btn btn-info '>Login</button>
+				<a href="{% url 'register' %}" class ="btn btn-danger">Sign Up</a>
+			<br> 
+			<br>
+				<a href="{% provider_login_url 'google' %}" class ="btn btn-warning">Log In with Gmail</a>
+			</form>
 	</p>
-	</div>
+</div>
 
 	
 
