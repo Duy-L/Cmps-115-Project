@@ -14,7 +14,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 User = get_user_model()
 
 from .utils import unique_slug_generator
-
+#Lists for Drop Down Menu (Tags)
 BRANDS= [
 	('other', 'Other'),
     ('nike', 'Nike'),
@@ -31,12 +31,12 @@ ARTICLES= [
     ('footwear', 'Footwear'),
     ('accesories', 'Accesories'),
     ]
-
+#finding file extension
 def get_filename_ext(filepath):
 	base_name = os.path.basename(filepath)
 	name, ext = os.path.splitext(base_name)
 	return name, ext
-
+#give user images extensions
 def upload_image_path(instance, filename):
 	new_filename = random.randint(1,234423425)
 	name, ext = get_filename_ext(filename)
@@ -52,8 +52,7 @@ class ProductForm(forms.Form):
 	image = forms.ImageField()
 	brand = forms.CharField()
 
-#EVERY TIME YOU SAVE YOUR MODEL YOU MUST MAKEMIGRATIONS AND MIGRATE IN TERMINAL
-#No underscores in name, names singular eg. Product not Products
+#find subsets of entire set of Product objects
 class ProductQuerySet(models.query.QuerySet):
 	def active(self):
 		return self.filter(active=True)
