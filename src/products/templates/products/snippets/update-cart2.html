@@ -1,3 +1,5 @@
+<!-- This is in the product page, if it is not in cart then add, else there will also be a button 
+that allows the user to check out -->
 <form method='POST' action='{% url "cart:update_add" %}' class="form"> {% csrf_token %}
       <input type='hidden' name='product_id' value='{{ product.id }}' />
       {% if product in cart.products.all %}
@@ -6,5 +8,4 @@
       {% elif product not in cart.products.all %}
             <button type='submit' class='btn btn-warning'>Add to cart</button>
       {% endif %}
-
-    </form>
+ </form>

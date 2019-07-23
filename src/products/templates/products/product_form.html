@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+
+<!-- CSS CONTENT -->
 <style>
 .field-title label{
 	font-size: 17px;
-
 }
 .container{
 	width: 55%;
@@ -25,28 +26,25 @@
 }
 </style>
 
+
+<!-- #this is the SELL / list user product page -->
 <div class = "box1">
 	<h1>{{ title }}</h1>
-
-
-<div class="container">
-	<h3 style ="text-indent: .5em;">Add a New Listing</h3>
-	<div class='row'>
-    	<div class='col'>
-    		<p>{{ content }}</p>
-    		<div class='col-sm-6 col-12'>
-
-			<form enctype="multipart/form-data" method='POST'> {% csrf_token %}
-				<div class="field-title"><strong>
-				{{ form.as_p }}
-				</strong></div>
-
-	    		<button type='submit' class='btn btn-danger'>Publish</button>
-	    	</form>
-
-    		</div>
+	<div class="container">
+		<h3 style ="text-indent: .5em;">Add a New Listing</h3>
+		<div class='row'>
+			<div class='col'>
+				<p>{{ content }}</p>
+				<div class='col-sm-6 col-12'>
+				<form enctype="multipart/form-data" method='POST'> {% csrf_token %}
+					<div class="field-title"><strong>
+					{{ form.as_p }}</strong>
+				    </div>
+					<button type='submit' class='btn btn-danger'>Publish</button>
+				</form>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 </div>
 {% endblock %}

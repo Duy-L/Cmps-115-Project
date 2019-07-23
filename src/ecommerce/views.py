@@ -4,7 +4,10 @@ from django.shortcuts import render, redirect
 
 from .forms import  LoginForm, RegisterForm
 
+#render pages
 
+
+#render home page
 def home_page(request):
 	context = {
 		"content": "Shop by Category",
@@ -13,9 +16,11 @@ def home_page(request):
 		context["premium_content"] = "YEAHHHHH"
 	return render(request, "home_page.html", context)
 
+#render profile page
 def profile_page(request):
 	return render(request,"home_page.html" )
 
+#render login page
 def login_page(request):
 	form = LoginForm(request.POST or None)
 	context = {
@@ -33,10 +38,11 @@ def login_page(request):
 			return redirect("/")
 		else:
 			print("Error")
-
 	return render(request, "auth/login.html", context)
 
 User = get_user_model()
+
+#render register page
 def register_page(request):
 	form = RegisterForm(request.POST or None)
 	context = {
@@ -55,7 +61,7 @@ def register_page(request):
 		
 	return render(request, "auth/register.html", context)
 
-
+#render logout page
 def logout_page (request):
 	logout (request)
 	context = {

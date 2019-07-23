@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
-
 {% block title %}
     Checkout
 {% endblock %}
-
 {% block content %}
+
+<!-- CSS PORTION -->
 <style>
 .new{
     font-weight: bold;
     width: 350px;
     float: left;
     margin-left: 7%;
-  
+
 }
  .order-info {
     float:right;
@@ -41,29 +41,30 @@
 .order-info span {
     float:right;
 }
-
 </style>
-   <br>
-    <div class="order-info">
-        <h3>Your order</h3>
-        <ul>
-            {% for product in cart.products.all %}
-                <li>{{ product.title }} - <span>${{ product.price }}</span></li>
-            {% endfor %}
-        </ul>
-        <p>Total: ${{ cart.total }}</p>
-        <br>
-        <br>
-        <p><input type="submit" class='btn btn-success lg' value="Place order"></p>
-    </div> 
 
+<!-- this lists out of the orders in a separate box on the right -->
+<br>
+<div class="order-info">
+<h3>Your order</h3>
+    <ul>
+        {% for product in cart.products.all %}
+            <li>{{ product.title }} - <span>${{ product.price }}</span></li>
+        {% endfor %}
+    </ul>
+<p>Total: ${{ cart.total }}</p>
+<br>
+<br>
 
+</div>
+
+<!-- this render the shipping address form -->
 <form action="." method="post" class="new">
     <h2>Checkout</h2>
-    <!-- {{ form.as_p }} -->
     <div class="col-md-6">{{ form.as_p }}</div>
+    <p><input type="submit" class='btn btn-success lg' value="Place order"></p>
     {% csrf_token %}
-</form>
 
+</form>
 </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+<!-- CSS PORTION -->
 <style>
 .card-img-top{
     height: 350px;
@@ -36,8 +37,8 @@
 }
 </style>
 
+<!-- This displays the product page  -->
 <div class="card">
-	
 	{% if instance.image %}
 		<a href="{{ instance.get_absolute_url }}">
   			<img class="card-img-top" src="{{ instance.image.url }}" alt="{{ instance.title }}">
@@ -51,10 +52,6 @@
     	<h5 class="card-title">{{ instance.title}}</h5>
 		<p class="card-description">{{ instance.description}}</p>
 		</div></a>
-		
-	
 		<p class="card-price">${{ instance.price}}</p>
-	
-      
   	</div>
 </div>

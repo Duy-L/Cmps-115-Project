@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+
+<!-- CSS PORTION -->
 <style>
 .col{
 	display: grid;
@@ -30,33 +32,28 @@ h1{
 	vertical-align: bottom;
 
 }
-
 </style>
 
 
+<!-- this is our staff page / banner -->
 <div class="box1">
 	<h1><p style=" display: table-cell; padding: 1em; position: center;">
 	Curated Picks from Staff</p></h1>
 </div>
 <br>
 <br>
-<div class='row'>
 
+<!-- this portion displays the products underneath the banner -->
+<div class='row'>
 {% for obj in object_list %}
 	<div class="col">
 		{% include 'products/snippets/card.html' with instance=obj %}
-
 		{% if forloop.counter %}
 			</div>
 			<div class="grid"></div>
-			
-		
-		{% else %}
-			
+		{% else %}	
 			</div>
 		{% endif %} 
-
 	{% endfor %}
-	
 </div>
 {% endblock %}

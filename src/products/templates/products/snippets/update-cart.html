@@ -1,3 +1,4 @@
+<!-- CSS PORTION -->
 <style>
 .button1{
    background-color: white;
@@ -8,13 +9,11 @@
 }
 </style>
 
-
-
+<!-- This is the remove button in the cart page -->
 <form method='POST' action='{% url "cart:update_remove" %}' class="form"> {% csrf_token %}
   <input type='hidden' name='product_id' value='{{ product.id }}' />
   {% if product in cart.products.all %}
        <button class="button1" >Remove</button>
- 
   {% endif %}
 
 </form>
