@@ -10,6 +10,7 @@ from products.views import product_inactive_view
 
 
 def payment_process(request):
+    # This is responsible for Paypal payment integration
     host = request.get_host()
 
     cart_obj, new_obj = Cart.objects.new_or_get(request)
@@ -37,12 +38,11 @@ def payment_process(request):
 
 @csrf_exempt
 def payment_done(request):
+    # When the payment went through this will deactivate the products that were bought
     cart_obj, new_obj = Cart.objects.new_or_get(request)
     products = cart_obj.products.all()
+
     for product in products:
-        print(product.id, product.active)
-        product_obj = Product.objects.get(id=product.id)
-        print(product_obj)
         product_inactive_view(request, product.slug)
         cart_obj.products.remove(product)
         request.session['cart_items'] = cart_obj.products.count()
