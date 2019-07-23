@@ -16,11 +16,12 @@ User = get_user_model()
 from .utils import unique_slug_generator
 #Lists for Drop Down Menu (Tags)
 BRANDS= [
-	('other', 'Other'),
     ('nike', 'Nike'),
-    ('adidas', 'Adidas'),
-    ('converse', 'Converse'),
-    ('levis', 'Levis'),
+    ('carhartt', 'Carhartt'),
+    ('off-white', 'Off-white'),
+    ('balenciaga', 'Balenciaga'),
+	('undercover', 'Undercover'),
+	('other', 'Other'),
     ]
 
 ARTICLES= [
