@@ -12,11 +12,12 @@ class CheckoutForm(forms.Form):
     address = forms.CharField(required=True, label='Address')
     postal_code = forms.IntegerField(required=True, label='Postal code:')
     city = forms.CharField(required=True, label='City:')
-    state = forms.CharField(required=True, label = 'State/Country:')
-
+    state = forms.CharField(required=True, label='State/Country:')
 
 
 def checkout_info(request):
+    # Checks the form the user needs to fill out for checkout
+    # If the form is valid then it will save the the information and proceed to payment methods page
     submitted = False
 
     cart_obj, new_obj = Cart.objects.new_or_get(request)
@@ -31,7 +32,7 @@ def checkout_info(request):
                 shipping = cd['email'] + '\r\n'
                 shipping = shipping + cd['first_name'] + ' ' + cd['last_name'] + '\r\n'
                 shipping = shipping + cd['address'] + '\r\n'
-                shipping = shipping + cd['city'] + ', ' + cd['state'] +' '+str(cd['postal_code'])
+                shipping = shipping + cd['city'] + ', ' + cd['state'] + ' ' + str(cd['postal_code'])
                 product.shipping = shipping
                 product.save()
 
