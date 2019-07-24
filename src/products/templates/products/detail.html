@@ -44,7 +44,12 @@
 						<br>
 					{% endif %}
 				{% else %}
-					{% include 'products/snippets/update-cart2.html' with product=object cart=cart %}
+					{% if object.active == True %}
+						{% include 'products/snippets/update-cart2.html' with product=object cart=cart %}
+					{% else %}
+						<i><font color="red">(ITEM HAS SOLD TO {{object.buyer}} ) </font></i>
+						<br>
+					{% endif %}
 				{% endif %}
 			{% else %}
 				<div>
