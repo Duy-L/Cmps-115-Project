@@ -20,7 +20,7 @@ cffi==1.12.3
 chardet==3.0.4
 Click==7.0
 codegen==1.0
-cryptography==2.7
+cryptography==3.2
 cssselect2==0.2.1
 defusedxml==0.6.0
 dj-database-url==0.5.0
