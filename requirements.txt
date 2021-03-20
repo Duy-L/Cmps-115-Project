@@ -83,7 +83,7 @@ html5lib==1.0.1
 idna==2.8
 ipaddress==1.0.22
 itsdangerous==1.1.0
-Jinja2==2.10.1
+Jinja2==2.11.3
 jmespath==0.9.4
 jsonfield==2.0.2
 kombu==4.6.3
