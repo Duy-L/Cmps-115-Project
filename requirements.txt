@@ -99,7 +99,7 @@ pandas==0.24.2
 patterns==0.3
 pep8==1.7.1
 phonenumberslite==8.10.14
-Pillow==6.1.0
+Pillow==9.0.1
 pinax-likes==3.0.1
 pipenv==2018.11.26
 prices==1.0.0
