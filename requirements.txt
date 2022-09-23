@@ -104,7 +104,7 @@ pinax-likes==3.0.1
 pipenv==2018.11.26
 prices==1.0.0
 promise==2.2.1
-protobuf==3.8.0
+protobuf==3.18.3
 psycopg2==2.8.3
 psycopg2-binary==2.8.3
 purl==1.5
