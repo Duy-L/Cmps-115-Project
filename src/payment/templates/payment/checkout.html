@@ -5,65 +5,6 @@
 {% endblock %}
 {% block content %}
 
-<!-- CSS PORTION -->
-<style>
-.new{
-    font-weight: bold;
-    width: 350px;
-    float: left;
-    margin-left: 7%;
-
-}
- .order-info {
-    float:right;
-    width: 45%;
-    background:#efefef;
-    padding:10px 20px;
-    color:#333;
-    border-bottom:4px solid green;
-}
-
-.order-info h3 {
-    color:black;
-}
-
-.order-info ul li {
-    margin:0;
-    padding:0;
-    font-size:14px;
-}
-
-.order-info p {
-    font-weight:bold;
-    float:right;
-}
-
-.order-info span {
-    float:right;
-}
-</style>
-
-<!-- this lists out of the orders in a separate box on the right -->
-<br>
-<div class="order-info">
-<h3>Your order</h3>
-    <ul>
-        {% for product in cart.products.all %}
-            <li>{{ product.title }} <span>${{ product.price }}</span></li>
-        {% endfor %}
-    </ul>
-<p>Total: ${{ cart.total }}</p>
-<br>
-<br>
-</div>
-
-<!-- this render the shipping address form -->
-<form action="." method="post" class="new">
-    <h2>Checkout</h2>
-    <div class="col-md-6">{{ form.as_p }}</div>
-    <p><input type="submit" class='btn btn-success lg' value="Place order"></p>
-    {% csrf_token %}
-
 </form>
 </div>
 {% endblock %}
